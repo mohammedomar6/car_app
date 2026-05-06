@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: Image.asset('assets/logo.png'),
-          leadingWidth: 100,
-          elevation: 0,
+
           backgroundColor: Colors.white,
         ),
         backgroundColor: Colors.white,
