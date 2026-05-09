@@ -1,39 +1,41 @@
-import 'package:animate_do/animate_do.dart';
+import 'package:car_app/core/theme/app_theme.dart';
+import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    EasyLocalization(
+      startLocale: Locale('en'),
+      saveLocale: true,
+      child: MyApp(),
+      path: "assets/translation",
+      supportedLocales: [Locale('en'), Locale('ar')],
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  String appBarName = 'وصفة اليوم';
-  Color orange = Colors.orange;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-
-          backgroundColor: Colors.white,
-        ),
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BackInLeft(
-                curve: Curves.bounceIn,
-                duration: Duration(seconds: 3),
-                child: Image.asset('assets/logo.png', width: 200),
-              ),
-              Text('CADRINGF', style: TextStyle(fontSize: 40)),
-            ],
-          ),
-        ),
-      ),
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      builder: (context, child) {
+        return MaterialApp(
+          theme:AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          supportedLocales: context.supportedLocales,
+          localizationsDelegates: context.localizationDelegates,
+          locale: context.locale,
+          routes: {'/': (context) => SplashScreen()},
+        );
+      },
     );
   }
 }
