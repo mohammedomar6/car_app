@@ -1,4 +1,5 @@
 import 'package:car_app/core/theme/app_theme.dart';
+import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
 import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => SplashScreen(),
             '/onboarding': (context) => OnboardingScreen(),
+            '/login':(context)=>LoginScreen(),
           },
         );
       },

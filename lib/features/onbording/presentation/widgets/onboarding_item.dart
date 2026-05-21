@@ -97,7 +97,9 @@ final PageController controller ;
                       child: Text(AppStrings.next),
                     )
                         : OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/login');
+                      },
                       child: Text(AppStrings.start),
                     ),
                   ),
