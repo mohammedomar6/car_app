@@ -10,5 +10,7 @@ class AppColors {
   static Color black80 = Color(0xCC121414);
   static Color containerBackground = Color(0xff0d0e0e);
   static Color grey = Color(0xffBAB8B7);
+   static Color darkgrey =Color(0xff1E20204D);
+   static Color text =Color(0xffE4BEB4);
 }
 
