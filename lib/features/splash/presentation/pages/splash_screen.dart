@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-        fit: StackFit.loose,
+        fit: StackFit.expand,
         children: [
           Image.asset(AppImage.splashBackground, fit: BoxFit.cover),
 
