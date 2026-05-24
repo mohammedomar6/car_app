@@ -42,7 +42,7 @@ final PageController controller ;
          Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 225.h,
+            height: 270.h,
             decoration: BoxDecoration(
               color: AppColors.black80,
               borderRadius: BorderRadius.only(

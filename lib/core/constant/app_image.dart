@@ -8,6 +8,8 @@ static String o2='assets/image/onboarding/o2.png';
 static String o3='assets/image/onboarding/o3.png';
 static String line='assets/image/onboarding/line.png';
 // auth
-  static String backgroundAuth='assets/image/auth/backgroundAuth.png';
+  static String backgroundLogin='assets/image/auth/backgroundAuth.png';
+  static String backgroundSignUp='assets/image/auth/create_account.png';
+
 
 }

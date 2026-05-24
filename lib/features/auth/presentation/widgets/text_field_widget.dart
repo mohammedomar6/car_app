@@ -1,57 +1,89 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/app_icon.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key});
+class TextFieldWidget extends StatefulWidget {
+ const  TextFieldWidget({
+    super.key,
+    required this.label,
+    required this.type,
+    required this.hint,
+    required this.icon,
+    required this.isPassword,
+
+  });
+
+  final String label;
+  final TextInputType type;
+  final String hint;
+  final IconData icon;
+ final bool isPassword ;
+
+  @override
+  State<TextFieldWidget> createState() => _TextFieldWidgetState();
+}
+
+class _TextFieldWidgetState extends State<TextFieldWidget> {
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    return    Container(
-      padding: EdgeInsets.all(40),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 260,top: 10,bottom: 15),
-            child: Text('Email Address',style:TextStyle(
-              color: AppColors.text,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-            ),),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+            widget.label,
+            style: Theme
+                .of(context)
+                .textTheme
+                .bodySmall
+        ),
+        SizedBox(height: 10.h),
+        Container(
+          margin: EdgeInsets.only(bottom: 15.h),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: AppColors.darkGrey,
+            border: Border(bottom: BorderSide(color: AppColors.textFieldFont)),
           ),
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            decoration:InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.darkgrey,
-                  width: 2,
+          height: 80.h,
+          width: double.infinity,
+          child:
+            TextFormField(
+
+              obscureText: widget.isPassword? obscureText : false,
+              keyboardType: widget.type,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 20.h,
                 ),
+                suffixIcon:widget.isPassword? IconButton(onPressed: () {
+                 setState(() {
+                   obscureText= !obscureText;
+                 });
+                },
+                    icon: Icon(
+                        obscureText  ? Icons.visibility_off : Icons.visibility)):null,
+                border: InputBorder.none,
+                focusedBorder: InputBorder.none,
+
+
+                hintText: widget.hint,
+
+                prefixIcon:Icon(widget.icon),
+
               ),
-              focusColor: AppColors.grey,
-              hintText: 'example@velocity.com',
-              hintStyle: TextStyle(
-                  color: AppColors.grey
-              ),
-              // filled: true,
-              // fillColor: Colors.grey.shade200,
-              prefixIcon: Icon(AppIcon.email,color: AppColors.text,),
-              enabledBorder: OutlineInputBorder(
-
-                  borderSide:  BorderSide(
-                      color: AppColors.darkgrey
-                  )
-              ),
-
-
-
-            ) ,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .bodySmall,
+              showCursor: true,
+            ),
           ),
-        ],
-      ),
+
+      ],
     );
   }
 }

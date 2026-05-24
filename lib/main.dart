@@ -1,5 +1,6 @@
 import 'package:car_app/core/theme/app_theme.dart';
 import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
+import 'package:car_app/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
 import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: Size(390, 884),
       builder: (context, child) {
         return MaterialApp(
           theme:AppTheme.lightTheme,
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
             '/': (context) => SplashScreen(),
             '/onboarding': (context) => OnboardingScreen(),
             '/login':(context)=>LoginScreen(),
+            '/sign_up':(context)=>SignUpScreen(),
           },
         );
       },

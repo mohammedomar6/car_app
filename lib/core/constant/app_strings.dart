@@ -26,4 +26,22 @@ class AppStrings {
   static String skip = 'Skip';
 
   static String start = 'Let’s Start';
+  // auth _ login
+static String welcome='Welcome Back';
+static String haveAccount="Don't have an account?";
+static String createAccount="Create Account";
+static String signIn="SIGN IN";
+static String password = "PASSWORD";
+static String email = "EMAIL ADDRESS";
+static String  hint ='example@velocity.com';
+static String obscure ="********";
+static String create ="CREATE ";
+static String account ="ACCOUNT";
+static String fullName ="FULL NAME";
+static String phoneNumber ="PHONE NUMBER";
+static String hintName ="JOHN DOE";
+static String hintPhoneNumber ="09xxxxxxxx";
+static String alreadyHaveAccount ="Already have an account? ";
+
+
 }

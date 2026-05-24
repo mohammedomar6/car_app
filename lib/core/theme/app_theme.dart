@@ -5,8 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
+    fontFamily: 'Poppins',
     scaffoldBackgroundColor: AppColors.backgroundDark,
     textTheme: TextStyleTheme.textThemeDark,
+    textSelectionTheme: TextSelectionThemeData(cursorColor: AppColors.textAuth),
+    inputDecorationTheme: InputDecorationTheme(prefixIconColor: AppColors.textAuth,  hintStyle: TextStyleTheme.textThemeDark.bodySmall,),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         foregroundColor: WidgetStatePropertyAll(AppColors.secondary),
@@ -19,6 +22,17 @@ class AppTheme {
         ),
         foregroundColor: WidgetStatePropertyAll(AppColors.grey),
         side: WidgetStatePropertyAll(BorderSide(color: AppColors.secondary)),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        alignment: AlignmentDirectional.center,
+        backgroundColor: WidgetStatePropertyAll(AppColors.secondary),
+        foregroundColor: WidgetStatePropertyAll(AppColors.backgroundDark),
+        iconAlignment: IconAlignment.end,
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+        ),
       ),
     ),
   );
