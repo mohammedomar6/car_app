@@ -109,6 +109,6 @@ final PageController controller ;
           ),
         ),
       ],
-    );;
+    );
   }
 }

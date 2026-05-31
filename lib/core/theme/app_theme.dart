@@ -9,7 +9,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.backgroundDark,
     textTheme: TextStyleTheme.textThemeDark,
     textSelectionTheme: TextSelectionThemeData(cursorColor: AppColors.textAuth),
-    inputDecorationTheme: InputDecorationTheme(prefixIconColor: AppColors.textAuth,  hintStyle: TextStyleTheme.textThemeDark.bodySmall,),
+    inputDecorationTheme: InputDecorationTheme(suffixIconColor: AppColors.textAuth,prefixIconColor: AppColors.textAuth,  hintStyle: TextStyleTheme.textThemeDark.bodySmall,),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         foregroundColor: WidgetStatePropertyAll(AppColors.secondary),
