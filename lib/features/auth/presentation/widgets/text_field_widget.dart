@@ -11,9 +11,11 @@ class TextFieldWidget extends StatefulWidget {
     required this.icon,
     required this.isPassword,
     required this.controller,
-    required this.validator
-  });
+    required this.validator,
+    required this.color,
 
+  });
+  final Color color;
   final String label;
   final TextInputType type;
   final String hint;
@@ -40,7 +42,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           margin: EdgeInsets.only(bottom: 15.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: AppColors.darkGrey,
+            color: widget.color,
             border: Border(bottom: BorderSide(color: AppColors.textFieldFont)),
           ),
           height: 80.h,
@@ -75,6 +77,7 @@ autovalidateMode:AutovalidateMode.disabled ,
             ),
             style: Theme.of(context).textTheme.bodySmall,
             showCursor: true,
+
           ),
         ),
       ],

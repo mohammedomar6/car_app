@@ -32,7 +32,11 @@ class TextStyleTheme {
       fontSize:16.sp,
       color: AppColors.textFieldFont
     ),
-
+titleLarge:TextStyle(
+  fontWeight: FontWeight.w900,
+  fontSize: 26.sp,
+  color: AppColors.textAuth
+),
 
   );
 }

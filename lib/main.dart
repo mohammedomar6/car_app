@@ -1,12 +1,20 @@
 import 'package:car_app/core/theme/app_theme.dart';
 import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:car_app/features/auth/presentation/pages/sign_up_screen.dart';
+import 'package:car_app/features/favorites/presentation/pages/favorite_screen.dart';
+
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
 import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/home/presentation/pages/home_screen.dart';
+import 'features/main_screen/presentation/pages/main_screen.dart';
+import 'features/profile/presentation/pages/profile_screen.dart';
+import 'features/search/presentation/pages/search_screen.dart';
+
 
 void main() {
   runApp(
@@ -41,6 +49,16 @@ class MyApp extends StatelessWidget {
             '/onboarding': (context) => OnboardingScreen(),
             '/login':(context)=>LoginScreen(),
             '/sign_up':(context)=>SignUpScreen(),
+            '/main_screen':(context)=>MainScreen(),
+            '/home_screen':(context)=>HomeScreen(),
+            '/search_screen':(context)=>SearchScreen(),
+            '/profile_screen':(context)=>ProfileScreen(),
+            '/favorite_screen':(context)=>FavoriteScreen(),
+
+
+
+
+
           },
         );
       },

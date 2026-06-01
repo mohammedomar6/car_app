@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 40.h),
                GlassBlurWidget(height: 453.h, width: 350.w, child: Column(
                  children: [
-                   TextFieldWidget(
+                   TextFieldWidget( color: AppColors.darkGrey,
                      validator: (p0) {
                      if( ! AppUtils.isValidEmail(p0!)){
                        return "Enter Email";
@@ -64,6 +64,7 @@ class LoginScreen extends StatelessWidget {
                    ),
 
                    TextFieldWidget(
+                     color: AppColors.darkGrey,
                      validator: (p0) {
                       if( p0!.isEmpty ){
                         return "Enter password";
@@ -82,11 +83,10 @@ class LoginScreen extends StatelessWidget {
                    ),
                    SizedBox(height: 30.h,),
                   ElevatedButtonWidget(width: 234.w, height: 59.h, onPressed: () {
-
-                                   if(formKey.currentState!.validate()){
-                                       print('vvv'
-                                       );
-                                   }
+Navigator.of(context).pushNamed("/main_screen");
+                                   // if(formKey.currentState!.validate()){
+                                   //
+                                   // }
                   }, label: AppStrings.signIn, icon: AppIcon.arrow)
                  ],
                ),),

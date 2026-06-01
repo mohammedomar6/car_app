@@ -9,6 +9,11 @@ class AppIcon {
   static IconData password =Icons.lock_outline_rounded;
   static IconData person =Icons.person_2_outlined;
   static IconData phone =Icons.phone_enabled_outlined;
+  static IconData menu =Icons.menu;
+  static IconData home =Icons.home;
+  static IconData search =Icons.search;
+  static IconData favorite =Icons.favorite_border;
+  static IconData profile =Icons.person_outlined;
 
 
 }

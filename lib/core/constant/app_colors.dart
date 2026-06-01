@@ -11,7 +11,9 @@ class AppColors {
   static Color containerBackground = Color(0xff0d0e0e);
   static Color grey = Color(0xffBAB8B7);
    static Color darkGrey =Color(0x801e2020);
-   static Color textAuth =Color(0xffE4BEB4);
+   static Color textAuth =Color(0xffFFB5A0);
    static Color textFieldFont =Color(0x33ffffff);
+   static Color backgroundAppbar =Color(0xFF121414);
+   static Color bottomNavigationBarItem =Color(0x99c9c6c5);
 }
 

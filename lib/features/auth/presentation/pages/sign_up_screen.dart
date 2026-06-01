@@ -11,12 +11,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/elevated_button_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
-   SignUpScreen({super.key});
-  TextEditingController emailController=TextEditingController();
-  TextEditingController nameController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
-  TextEditingController phoneController=TextEditingController();
-   final formKey = GlobalKey<FormState>();
+  SignUpScreen({super.key});
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -82,8 +84,14 @@ class SignUpScreen extends StatelessWidget {
                       width: 358.w,
                       child: Column(
                         children: [
-                          TextFieldWidget(
-                            validator: (p0) {AppUtils.isNull(p0!);},
+                          TextFieldWidget( color: AppColors.darkGrey,
+                            validator: (p0) {
+                              if (p0!.isEmpty) {
+                                return "Enter name";
+                              } else {
+                                return null;
+                              }
+                            },
                             controller: nameController,
                             label: AppStrings.fullName,
                             type: TextInputType.text,
@@ -91,19 +99,29 @@ class SignUpScreen extends StatelessWidget {
                             icon: AppIcon.person,
                             isPassword: false,
                           ),
-                          TextFieldWidget(controller: emailController,
+                          TextFieldWidget( color: AppColors.darkGrey,
+                            controller: emailController,
                             label: AppStrings.email,
                             validator: (p0) {
-                              AppUtils.isValidEmail(p0!);
+                              if (!AppUtils.isValidEmail(p0!)) {
+                                return "Enter email valid";
+                              } else {
+                                return null;
+                              }
                             },
                             type: TextInputType.emailAddress,
                             hint: AppStrings.hint,
                             icon: AppIcon.email,
                             isPassword: false,
                           ),
-                          TextFieldWidget(controller: phoneController,
+                          TextFieldWidget( color: AppColors.darkGrey,
+                            controller: phoneController,
                             validator: (p0) {
-                              AppUtils.isNull(p0);
+                              if (p0!.isEmpty) {
+                                return "Enter phone";
+                              } else {
+                                return null;
+                              }
                             },
                             label: AppStrings.phoneNumber,
                             type: TextInputType.phone,
@@ -111,9 +129,16 @@ class SignUpScreen extends StatelessWidget {
                             icon: AppIcon.phone,
                             isPassword: false,
                           ),
-                          TextFieldWidget(controller: passwordController,
+                          TextFieldWidget( color: AppColors.darkGrey,
+                            controller: passwordController,
                             validator: (p0) {
-                              AppUtils.isNull(p0);
+                              if (p0!.isEmpty) {
+                                return "Enter password";
+                              } else if (p0.length < 8) {
+                                return " password less than 8";
+                              } else {
+                                return null;
+                              }
                             },
                             label: AppStrings.password,
                             type: TextInputType.visiblePassword,
@@ -121,15 +146,24 @@ class SignUpScreen extends StatelessWidget {
                             icon: AppIcon.password,
                             isPassword: true,
                           ),
-      SizedBox(height: 15.h,),
-                          ElevatedButtonWidget(width: 234.w, height: 59.h, onPressed: () {
+                          SizedBox(height: 15.h),
+                          ElevatedButtonWidget(
+                            width: 234.w,
+                            height: 59.h,
+                            onPressed: () {
 
-                          }, label: AppStrings.createAccount, icon: AppIcon.arrow)
+                              if(formKey.currentState!.validate()){
+
+                              }
+                            },
+                            label: AppStrings.createAccount,
+                            icon: AppIcon.arrow,
+                          ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.all(8.0.r),
+                      padding: EdgeInsets.all(8.0.r),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -139,6 +173,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
+
                               Navigator.pushReplacementNamed(context, '/login');
                             },
                             child: Text(AppStrings.signIn),

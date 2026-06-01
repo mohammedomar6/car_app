@@ -42,6 +42,15 @@ static String phoneNumber ="PHONE NUMBER";
 static String hintName ="JOHN DOE";
 static String hintPhoneNumber ="09xxxxxxxx";
 static String alreadyHaveAccount ="Already have an account? ";
+static String home ="Home";
+static String search ='Search';
+static String favorites ="Favorites" ;
+static String profile ="Profile";
+static String textFieldSearch ="Search for your next supercar...";
+static String sellCar ="Sell Car";
+static String rentCar ="Rent Car";
+static String finance ="Finance";
+static String concierge ="Concierge";
 
 
 }
