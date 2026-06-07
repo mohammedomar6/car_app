@@ -55,6 +55,11 @@ static String featureCars ="Featured Supercars";
 static String viewAll  ="View All";
 static String brands  ="Browse Brands";
 static String subtitleBrand  ="Discover excellence through our curated selection of high-performance automotive legends";
-
+static String garage="My Garage";
+static String list="My Listings";
+static String history="Order History";
+static String security="Security";
+static String support="Concierge Support";
+static String logOut="Logout";
 
 }

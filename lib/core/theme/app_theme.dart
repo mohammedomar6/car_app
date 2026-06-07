@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTheme {
   static ThemeData get darkTheme => ThemeData(
     fontFamily: 'Poppins',
-
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.backgroundAppbar,
       foregroundColor: AppColors.textAuth,
@@ -38,10 +37,19 @@ class AppTheme {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: ButtonStyle(
         shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.r)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
         ),
-        foregroundColor: WidgetStatePropertyAll(AppColors.grey),
-        side: WidgetStatePropertyAll(BorderSide(color: AppColors.secondary)),
+        overlayColor: WidgetStatePropertyAll(AppColors.secondary),
+        side: WidgetStatePropertyAll(
+          BorderSide(
+            color: AppColors.textAuth.withValues(alpha: 0.5),
+            width: 0.3.w,
+          ),
+        ),
+        backgroundColor: WidgetStatePropertyAll(
+          AppColors.backgroundLight.withValues(alpha: 0.05),
+        ),
+        foregroundColor: WidgetStatePropertyAll(AppColors.backgroundLight),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

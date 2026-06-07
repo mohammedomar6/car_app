@@ -111,17 +111,8 @@ class CardCar extends StatelessWidget {
 
               width: 300.w,
               height: 59.h,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  overlayColor: WidgetStatePropertyAll(AppColors.secondary),
-                  side: WidgetStatePropertyAll(BorderSide(
-                      color: AppColors.textAuth.withValues(alpha: 0.5),
-                      width: 0.3.w)),
-                  backgroundColor: WidgetStatePropertyAll(
-                      AppColors.backgroundLight.withValues(alpha: 0.05)),
-                  foregroundColor: WidgetStatePropertyAll(
-                      AppColors.backgroundLight),
-                ),
+              child: OutlinedButton(
+
                 onPressed: () {},
                 child: Text("Details Of Car"),
               ),
