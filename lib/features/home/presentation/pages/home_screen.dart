@@ -3,14 +3,40 @@ import 'package:car_app/core/constant/app_icon.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/features/auth/presentation/widgets/card_widget.dart';
+
 import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dart';
+import 'package:car_app/features/home/presentation/widgets/card_car.dart';
+import 'package:car_app/features/home/presentation/widgets/container_brand.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+const  HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
+
+  List<String> cars = [
+    AppImage.lamborghini,
+    AppImage.ferrari,
+    AppImage.porsche,
+    AppImage.bmw,
+  ];
+  @override
+  void initState() {
+
+    super.initState();
+  }
+   @override
+  void dispose() {
+
+     searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
               child: TextFieldWidget(
-                color: AppColors.backgroundLight.withOpacity(0.05),
+                color: AppColors.backgroundLight.withValues(alpha: 0.05),
                 label: '',
                 type: TextInputType.text,
                 hint: AppStrings.textFieldSearch,
@@ -33,14 +59,93 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: Row(
-              children: [
-                CardWidget(image: AppImage.sellCar, title: AppStrings.sellCar),
-                CardWidget(image: AppImage.rentCar, title: AppStrings.rentCar),
-                CardWidget(image: AppImage.finance, title: AppStrings.finance),
-                CardWidget(image: AppImage.concierge, title: AppStrings.concierge),
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  CardWidget(image: AppImage.sellCar, title: AppStrings.sellCar),
+                  CardWidget(image: AppImage.rentCar, title: AppStrings.rentCar),
+                  CardWidget(image: AppImage.finance, title: AppStrings.finance),
+                  CardWidget(
+                    image: AppImage.concierge,
+                    title: AppStrings.concierge,
+                  ),
+                ],
+              ),
             ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 20.h)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppStrings.brands,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/brands_page');
+                    },
+                    child: Text(
+                      AppStrings.viewAll,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.secondary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 10)),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 100.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return ContainerBrand(image: cars[index],);
+                },
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppStrings.featureCars,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/cars_page');
+                    },
+                    child: Text(
+                      AppStrings.viewAll,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.secondary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(childCount: 2, (
+              context,
+              index,
+            ) {
+              return CardCar(name:  "Ferrari SF90 Straddle", price: 223.800, speed: 3.2, hp: 518);
+
+            }),
           ),
         ],
       ),

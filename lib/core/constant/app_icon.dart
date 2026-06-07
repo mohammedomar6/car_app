@@ -12,8 +12,10 @@ class AppIcon {
   static IconData menu =Icons.menu;
   static IconData home =Icons.home;
   static IconData search =Icons.search;
-  static IconData favorite =Icons.favorite_border;
+  static IconData favoriteOutLined =Icons.favorite_border;
+  static IconData favorite =Icons.favorite;
   static IconData profile =Icons.person_outlined;
+  static IconData speed =Icons.speed;
 
 
 }

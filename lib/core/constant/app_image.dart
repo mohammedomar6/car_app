@@ -10,12 +10,21 @@ static String line='assets/image/onboarding/line.png';
 // auth
   static String backgroundLogin='assets/image/auth/backgroundAuth.png';
   static String backgroundSignUp='assets/image/auth/create_account.png';
+  // home
   static String ring='assets/image/main_screen/ring.png';
   static String profile='assets/image/main_screen/Profile.png';
   static String sellCar ='assets/image/home/Container1.png';
   static String rentCar ='assets/image/home/Container2.png';
   static String finance ='assets/image/home/Container3.png';
   static String concierge ='assets/image/home/Container4.png';
+  static String lamborghini ='assets/image/home/lamborghini.png';
+  static String ferrari ='assets/image/home/ferrari.png';
+  static String porsche ='assets/image/home/porsche.png';
+  static String bmw ='assets/image/car/screen.png';
+  static String  car ='assets/image/home/Container.png';
+  static String  energy ='assets/image/car/energy.png';
+  static String  speed ='assets/image/car/speed.png';
+  static String  timer ='assets/image/car/timer.png';
 
 
 }

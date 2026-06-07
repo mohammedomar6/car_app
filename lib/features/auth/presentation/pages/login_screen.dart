@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
                 SizedBox(height: 40.h),
-               GlassBlurWidget(height: 453.h, width: 350.w, child: Column(
+               GlassBlurWidget(padding: 32.r,radius: 12.r,height: 453.h, width: 350.w, child: Column(
                  children: [
                    TextFieldWidget( color: AppColors.darkGrey,
                      validator: (p0) {

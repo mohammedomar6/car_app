@@ -51,6 +51,10 @@ static String sellCar ="Sell Car";
 static String rentCar ="Rent Car";
 static String finance ="Finance";
 static String concierge ="Concierge";
+static String featureCars ="Featured Supercars";
+static String viewAll  ="View All";
+static String brands  ="Browse Brands";
+static String subtitleBrand  ="Discover excellence through our curated selection of high-performance automotive legends";
 
 
 }

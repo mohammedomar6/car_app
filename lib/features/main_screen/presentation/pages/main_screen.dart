@@ -8,7 +8,6 @@ import 'package:car_app/features/profile/presentation/pages/profile_screen.dart'
 import 'package:car_app/features/search/presentation/pages/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../data/models/bottom_navigation_bar_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,7 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-    int currentIndex =0;
+  int currentIndex = 0;
 
   List<BottomNavigationBarModel> navigation = [
     BottomNavigationBarModel(
@@ -51,7 +50,10 @@ class _MainScreenState extends State<MainScreen> {
         leading: Icon(AppIcon.menu),
         title: Text(
           AppStrings.logoText,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme
+              .of(context)
+              .textTheme
+              .titleLarge,
         ),
         actions: [
           Image.asset(AppImage.ring),
@@ -72,19 +74,19 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: currentIndex,
         onTap: (value) {
           setState(() {
-            currentIndex = value ;
+            currentIndex = value;
           });
-
-        } ,
+        },
         items:
-            navigation
-                .map(
-                  (e) => BottomNavigationBarItem(
-                    label: e.title,
-                    icon: Icon(e.icon),
-                  ),
-                )
-                .toList(),
+        navigation
+            .map(
+              (e) =>
+              BottomNavigationBarItem(
+                label: e.title,
+                icon: Icon(e.icon),
+              ),
+        )
+            .toList(),
       ),
       body: navigation[currentIndex].page,
     );

@@ -1,7 +1,9 @@
 import 'package:car_app/core/theme/app_theme.dart';
 import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:car_app/features/auth/presentation/pages/sign_up_screen.dart';
+import 'package:car_app/features/cars/presentation/pages/brands_page.dart';
 import 'package:car_app/features/favorites/presentation/pages/favorite_screen.dart';
+import 'package:car_app/features/cars/presentation/pages/cars_page.dart';
 
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
 import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
             '/search_screen':(context)=>SearchScreen(),
             '/profile_screen':(context)=>ProfileScreen(),
             '/favorite_screen':(context)=>FavoriteScreen(),
+            '/cars_page':(context)=>CarsPage(),
+            '/brands_page':(context)=>BrandsPage(),
 
 
 

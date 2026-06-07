@@ -1,15 +1,14 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/constant/app_colors.dart';
 
 class GlassBlurWidget extends StatelessWidget {
-  const GlassBlurWidget({super.key, required this.height, required this.width, required this.child});
+  const GlassBlurWidget({super.key, required this.height, required this.width, required this.child, required this.radius, required this.padding});
  final double height;
  final double width;
  final Widget child;
+ final double radius;
+ final double padding;
 
 
 
@@ -17,17 +16,17 @@ class GlassBlurWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  ClipRRect(
-      borderRadius: BorderRadius.circular(12.r),
+      borderRadius: BorderRadius.circular(radius),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Container(
-          padding: EdgeInsets.all(32.r),
+          padding: EdgeInsets.all(padding),
           height: height,
           width: width,
           decoration: BoxDecoration(
             color: AppColors.backgroundLight.withAlpha(15),
           ),
-          child: child
+          child: Center(child: child)
         ),
       ),
     );

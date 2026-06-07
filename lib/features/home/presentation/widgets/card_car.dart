@@ -1,0 +1,135 @@
+import 'package:car_app/features/home/presentation/widgets/card_details_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/constant/app_colors.dart';
+import '../../../../core/constant/app_icon.dart';
+import '../../../../core/constant/app_image.dart';
+import '../../../auth/presentation/widgets/glass_blur_widget.dart';
+
+class CardCar extends StatelessWidget {
+  const CardCar({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.speed,
+    required this.hp,
+  });
+
+  final String name;
+  final double price;
+  final double speed;
+  final double hp;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+      width: 350.w,
+      height: 520.h,
+      decoration: BoxDecoration(
+        color: AppColors.backgroundLight.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.r),
+                  topRight: Radius.circular(20.r),
+                ),
+                child: Image.asset(
+                  "assets/image/home/redCar.png",
+                  width: double.infinity,
+                  height: 256.h,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                top: 12,
+                right: 5,
+                child: GlassBlurWidget(
+                  padding: 0.1.r,
+                  radius: 25.r,
+                  height: 50.h,
+                  width: 50.w,
+                  child: Center(
+                    child: Icon(
+                      AppIcon.favoriteOutLined,
+                      color: AppColors.backgroundLight,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: Theme
+                      .of(
+                    context,
+                  )
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontSize: 18.sp),
+                ),
+                Text(
+                  "$price\$",
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(
+                    fontSize: 15.sp,
+                    color: AppColors.secondary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CardDetailsWidget(image: AppImage.speed, title: '335  km/h'),
+              CardDetailsWidget(image: AppImage.timer, title: '2.8 sec'),
+              CardDetailsWidget(image: AppImage.energy, title: '789  hp'),
+            ],
+          ),
+          SizedBox(height: 30.h,),
+          Center(
+            child: SizedBox(
+
+              width: 300.w,
+              height: 59.h,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  overlayColor: WidgetStatePropertyAll(AppColors.secondary),
+                  side: WidgetStatePropertyAll(BorderSide(
+                      color: AppColors.textAuth.withValues(alpha: 0.5),
+                      width: 0.3.w)),
+                  backgroundColor: WidgetStatePropertyAll(
+                      AppColors.backgroundLight.withValues(alpha: 0.05)),
+                  foregroundColor: WidgetStatePropertyAll(
+                      AppColors.backgroundLight),
+                ),
+                onPressed: () {},
+                child: Text("Details Of Car"),
+              ),
+            ),
+          ),
+          SizedBox(height: 4),
+        ],
+      ),
+    );
+  }
+}

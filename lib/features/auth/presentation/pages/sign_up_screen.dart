@@ -80,6 +80,8 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20.h),
                     GlassBlurWidget(
+                      padding: 32.r,
+                      radius: 12.r,
                       height: 635.h,
                       width: 358.w,
                       child: Column(

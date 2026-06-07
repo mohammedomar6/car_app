@@ -26,7 +26,7 @@ class TextStyleTheme {
     ),
     bodySmall: TextStyle(
       fontSize: 12.sp,
-      color: AppColors.textAuth
+      color: AppColors.textAuth,
     ),
     displaySmall: TextStyle(
       fontSize:16.sp,
@@ -37,6 +37,9 @@ titleLarge:TextStyle(
   fontSize: 26.sp,
   color: AppColors.textAuth
 ),
+    titleMedium: TextStyle(fontWeight: FontWeight.w900,
+        fontSize: 22.sp,
+        color: AppColors.backgroundLight),
 
   );
 }

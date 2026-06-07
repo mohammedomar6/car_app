@@ -70,7 +70,9 @@ flutter:
      - assets/image/auth/
      - assets/image/main_screen/
      - assets/image/home/
+     - assets/image/car/
      - assets/translation/
+     - assets/image/car/screen.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
