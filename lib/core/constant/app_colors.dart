@@ -15,5 +15,6 @@ class AppColors {
    static Color textFieldFont =Color(0x33ffffff);
    static Color backgroundAppbar =Color(0xFF121414);
    static Color bottomNavigationBarItem =Color(0x99c9c6c5);
+   static Color miniContainer = Color(0x1affb5a0);
 }
 

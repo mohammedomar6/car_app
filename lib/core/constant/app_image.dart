@@ -27,10 +27,11 @@ static String line='assets/image/onboarding/line.png';
   static String  timer ='assets/image/car/timer.png';
   static String  garage ='assets/image/profile/pro1.png';
   static String  list ='assets/image/profile/pro2.png';
-  static String  security ='assets/image/profile/pro3.png';
+  static String  history ='assets/image/profile/pro3.png';
+  static String  security ='assets/image/profile/pro4.png';
   static String  support ='assets/image/profile/pro4.png';
-  static String  arrowPro ='assets/image/profile/pro4.png';
   static String  logOut ='assets/image/profile/logOut.png';
+  static String  arrowPro ='assets/image/profile/proIcon.png';
 
 
 

@@ -61,5 +61,7 @@ static String history="Order History";
 static String security="Security";
 static String support="Concierge Support";
 static String logOut="Logout";
+static String carsInGarage="Cars in Garage";
+static String activeListing="Active Listings";
 
 }
