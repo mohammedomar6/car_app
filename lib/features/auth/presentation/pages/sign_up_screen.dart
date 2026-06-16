@@ -3,9 +3,12 @@ import 'package:car_app/core/constant/app_icon.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/core/utils/app_utils.dart';
+import 'package:car_app/features/auth/data/models/register_request_model.dart';
+import 'package:car_app/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:car_app/features/auth/presentation/widgets/glass_blur_widget.dart';
 import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/elevated_button_widget.dart';
@@ -24,7 +27,24 @@ class SignUpScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        body: Stack(
+        body: BlocConsumer<AuthBloc, AuthState>(
+  listener: (context, state) {
+
+    if(state is RegisterSuccessState){
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(title: Text(state.registerResponseModel.message),);
+      },);
+    }
+    else if(state is RegisterErrorState){
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(title: Text(state.message),);
+      },);
+    }
+
+
+  },
+  builder: (context, state) {
+    return Stack(
           fit: StackFit.expand,
           children: [
             Image.asset(
@@ -86,7 +106,8 @@ class SignUpScreen extends StatelessWidget {
                       width: 358.w,
                       child: Column(
                         children: [
-                          TextFieldWidget( color: AppColors.darkGrey,
+                          TextFieldWidget(
+                            color: AppColors.darkGrey,
                             validator: (p0) {
                               if (p0!.isEmpty) {
                                 return "Enter name";
@@ -101,7 +122,8 @@ class SignUpScreen extends StatelessWidget {
                             icon: AppIcon.person,
                             isPassword: false,
                           ),
-                          TextFieldWidget( color: AppColors.darkGrey,
+                          TextFieldWidget(
+                            color: AppColors.darkGrey,
                             controller: emailController,
                             label: AppStrings.email,
                             validator: (p0) {
@@ -116,7 +138,8 @@ class SignUpScreen extends StatelessWidget {
                             icon: AppIcon.email,
                             isPassword: false,
                           ),
-                          TextFieldWidget( color: AppColors.darkGrey,
+                          TextFieldWidget(
+                            color: AppColors.darkGrey,
                             controller: phoneController,
                             validator: (p0) {
                               if (p0!.isEmpty) {
@@ -131,7 +154,8 @@ class SignUpScreen extends StatelessWidget {
                             icon: AppIcon.phone,
                             isPassword: false,
                           ),
-                          TextFieldWidget( color: AppColors.darkGrey,
+                          TextFieldWidget(
+                            color: AppColors.darkGrey,
                             controller: passwordController,
                             validator: (p0) {
                               if (p0!.isEmpty) {
@@ -153,10 +177,21 @@ class SignUpScreen extends StatelessWidget {
                             width: 234.w,
                             height: 59.h,
                             onPressed: () {
-
-                              if(formKey.currentState!.validate()){
+                              if (formKey.currentState!.validate()) {
 
                               }
+                              context.read<AuthBloc>().add(
+                                RegisterEvent(
+                                  registerRequestModel: RegisterRequestModel(
+                                    fullName: nameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    role: "user",
+                                    phone: phoneController.text,
+                                    address: "54465dgg",
+                                  ),
+                                ),
+                              );
                             },
                             label: AppStrings.createAccount,
                             icon: AppIcon.arrow,
@@ -175,7 +210,6 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-
                               Navigator.pushReplacementNamed(context, '/login');
                             },
                             child: Text(AppStrings.signIn),
@@ -188,7 +222,9 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        );
+  },
+),
       ),
     );
   }

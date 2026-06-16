@@ -7,23 +7,32 @@ import 'package:car_app/features/auth/data/models/register_response_model.dart';
 import 'package:http/http.dart' as http;
 class RemoteDataSourceAuth {
    Future<RegisterResponseModel> registerUser(RegisterRequestModel request)async  {
-  final response =await http.post(Uri.parse("uri"),body:jsonEncode(request.toJson() ));
+     print(request.email);
+  final response =await http.post(Uri.parse("http://192.168.100.211:5222/api/Auth/register"),body:jsonEncode(request.toJson() ),
+    headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },);
     if(response.statusCode==200){
+      print(response.statusCode);
       Map<String ,dynamic> map = jsonDecode(response.body);
 
       return  RegisterResponseModel.fromJson(map);
     }
     else {
-      throw Exception("Error BackEnd");
+      throw Exception(jsonDecode(response.body));
     }
 }
    Future<LoginResponseModel> loginUser(LoginRequestModel request)async {
- final response=   await http.post(Uri.parse("uri"),body:jsonEncode(request.toJson()) );
+ final response=   await http.post(Uri.parse("http://192.168.100.211:5222/api/Auth/login"),body:jsonEncode(request.toJson()) ,headers: {
+   'Content-Type': 'application/json',
+   'Accept': 'application/json',
+ },);
      if(response.statusCode==200){
      Map<String,dynamic>map=  jsonDecode(response.body);
      return LoginResponseModel.fromJson(map);
      }else{
-       throw Exception("sdfghj");
+       throw Exception(jsonDecode(response.body).toString());
      }
 }
 

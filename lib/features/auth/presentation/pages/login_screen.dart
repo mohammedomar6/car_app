@@ -5,10 +5,13 @@ import 'package:car_app/core/constant/app_icon.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/core/utils/app_utils.dart';
+import 'package:car_app/features/auth/data/models/login_request_model.dart';
+import 'package:car_app/features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import 'package:car_app/features/auth/presentation/widgets/elevated_button_widget.dart';
 import 'package:car_app/features/auth/presentation/widgets/glass_blur_widget.dart';
 import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,7 +25,20 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: AppColors.backgroundDark,
       body: Form(
         key:  formKey,
-        child: Stack(
+        child: BlocConsumer<LoginBloc, LoginState>(
+  listener: (context, state) {
+    if(state is LoginSuccess){
+      Navigator.of(context).pushNamed("/main_screen");
+    }
+    else if (state is LoginError){
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(title: Text(state.message),);
+      },);
+    }
+
+  },
+  builder: (context, state) {
+    return Stack(
           alignment: Alignment.topCenter,
           children: [
             Image.asset(
@@ -83,7 +99,10 @@ class LoginScreen extends StatelessWidget {
                    ),
                    SizedBox(height: 30.h,),
                   ElevatedButtonWidget(width: 234.w, height: 59.h, onPressed: () {
-Navigator.of(context).pushNamed("/main_screen");
+                     if(formKey.currentState!.validate()){
+                        context.read<LoginBloc>().add(LogiEvent(requestModel: LoginRequestModel(email: emailController.text, password: passwordController.text))); 
+                     }
+              
                                    // if(formKey.currentState!.validate()){
                                    //
                                    // }
@@ -112,7 +131,9 @@ Navigator.of(context).pushNamed("/main_screen");
               ],
             ),
           ],
-        ),
+        );
+  },
+),
       ),
     );
   }
