@@ -31,9 +31,7 @@ class SignUpScreen extends StatelessWidget {
   listener: (context, state) {
 
     if(state is RegisterSuccessState){
-      showDialog(context: context, builder: (context) {
-        return AlertDialog(title: Text(state.registerResponseModel.message),);
-      },);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.registerResponseModel.message)));
     }
     else if(state is RegisterErrorState){
       showDialog(context: context, builder: (context) {

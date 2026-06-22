@@ -13,13 +13,14 @@ class CardCar extends StatelessWidget {
     required this.name,
     required this.price,
     required this.speed,
-    required this.hp,
+    required this.hp, required this.image,
   });
 
   final String name;
   final double price;
   final double speed;
   final double hp;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +42,22 @@ class CardCar extends StatelessWidget {
                   topLeft: Radius.circular(20.r),
                   topRight: Radius.circular(20.r),
                 ),
-                child: Image.asset(
-                  "assets/image/home/redCar.png",
+                child: Image.network(
+                  image,
                   width: double.infinity,
                   height: 256.h,
+                  errorBuilder: (context, error, stackTrace) {
+                    return SizedBox(
+                        width: double.infinity,
+                        height: 256.h,
+                        child: Icon(Icons.error,size: 50.r,color: AppColors.secondary,));
+                  },
                   fit: BoxFit.cover,
                 ),
               ),
               Positioned(
-                top: 12,
-                right: 5,
+                top: 12.h,
+                right: 5.w,
                 child: GlassBlurWidget(
                   padding: 0.1.r,
                   radius: 25.r,
@@ -67,7 +74,7 @@ class CardCar extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.all(15.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -113,7 +120,9 @@ class CardCar extends StatelessWidget {
               height: 59.h,
               child: OutlinedButton(
 
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/car_details');
+                },
                 child: Text("Details Of Car"),
               ),
             ),

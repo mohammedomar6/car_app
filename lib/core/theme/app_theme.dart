@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   static ThemeData get darkTheme => ThemeData(
+
     fontFamily: 'Poppins',
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.backgroundAppbar,

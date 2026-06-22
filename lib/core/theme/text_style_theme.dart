@@ -29,5 +29,10 @@ class TextStyleTheme {
       fontSize: 22.sp,
       color: AppColors.backgroundLight,
     ),
+    labelMedium: TextStyle(
+      fontSize: 25.sp,
+      color: AppColors.backgroundLight,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }

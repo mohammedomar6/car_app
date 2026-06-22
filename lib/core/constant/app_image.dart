@@ -32,6 +32,8 @@ static String line='assets/image/onboarding/line.png';
   static String  support ='assets/image/profile/pro4.png';
   static String  logOut ='assets/image/profile/logOut.png';
   static String  arrowPro ='assets/image/profile/proIcon.png';
+  static String  check ='assets/image/profile/check.png';
+  static String  engine ='assets/image/car/engine.png';
 
 
 

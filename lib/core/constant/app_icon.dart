@@ -16,6 +16,8 @@ class AppIcon {
   static IconData favorite =Icons.favorite;
   static IconData profile =Icons.person_outlined;
   static IconData speed =Icons.speed;
+  static IconData share =Icons.share;
+  static IconData arrowContainer =Icons.arrow_back_ios_sharp;
 
 
 }

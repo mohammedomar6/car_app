@@ -3,6 +3,7 @@ import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/core/constant/gradient_text.dart';
+import 'package:car_app/core/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,9 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void goNext() async {
+
     await Future.delayed(Duration(seconds: 3));
-       Navigator.of(context).pushNamed('/onboarding');
-  }
+    if(await SecureStorageService.getToken()==null){
+       Navigator.of(context).pushNamed('/login');}
+    else if(await SecureStorageService.getToken()!=null){
+      Navigator.of(context).pushNamed('/main_screen');}
+    }
+
 
   @override
   Widget build(BuildContext context) {

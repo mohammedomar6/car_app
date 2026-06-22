@@ -1,3 +1,5 @@
+import 'package:car_app/core/utils/secure_storage.dart';
+
 class AppStrings {
   // splash
   static String logoText = 'VELOCITY';
@@ -63,5 +65,17 @@ static String support="Concierge Support";
 static String logOut="Logout";
 static String carsInGarage="Cars in Garage";
 static String activeListing="Active Listings";
+static String baseUrl="http://192.168.100.214:5222/api/";
+static Map<String,String> headerApi={
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer ${SecureStorageService.getToken()}',
+};
+static String speed ="Top Speed";
+static String km ="0-100 km/h";
+static String horsepower ="Horsepower";
+static String engine ="Engine";
+static String description ="Description";
+static String technical ="Technical Specs";
 
 }

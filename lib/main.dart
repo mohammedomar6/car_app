@@ -4,14 +4,18 @@ import 'package:car_app/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:car_app/features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:car_app/features/auth/presentation/pages/sign_up_screen.dart';
+import 'package:car_app/features/cars/data/data_sources/remote_data_source_car.dart';
+import 'package:car_app/features/cars/presentation/manager/car_bloc.dart';
 import 'package:car_app/features/cars/presentation/pages/brands_page.dart';
+import 'package:car_app/features/cars/presentation/pages/car_details.dart';
 import 'package:car_app/features/favorites/presentation/pages/favorite_screen.dart';
 import 'package:car_app/features/cars/presentation/pages/cars_page.dart';
 
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
 import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
+import 'package:car_app/test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,9 +31,10 @@ void main() {
     EasyLocalization(
       startLocale: Locale('en'),
       saveLocale: true,
-      child: MyApp(),
+
       path: "assets/translation",
       supportedLocales: [Locale('en'), Locale('ar')],
+      child: MyApp(),
     ),
   );
 }
@@ -45,7 +50,8 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => AuthBloc(RemoteDataSourceAuth()),),
-            BlocProvider(create: (context) => LoginBloc(RemoteDataSourceAuth()),)
+            BlocProvider(create: (context) => LoginBloc(RemoteDataSourceAuth()),),
+            BlocProvider(create: (context) => CarBloc(RemoteDataSourceCar())..add(GetAllCars()),)
           ],
           child: MaterialApp(
             theme:AppTheme.lightTheme,
@@ -55,24 +61,21 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationDelegates,
             locale: context.locale,
-            routes: {
-              '/': (context) => SplashScreen(),
-              '/onboarding': (context) => OnboardingScreen(),
-              '/login':(context)=>LoginScreen(),
-              '/sign_up':(context)=>SignUpScreen(),
-              '/main_screen':(context)=>MainScreen(),
-              '/home_screen':(context)=>HomeScreen(),
-              '/search_screen':(context)=>SearchScreen(),
-              '/profile_screen':(context)=>ProfileScreen(),
-              '/favorite_screen':(context)=>FavoriteScreen(),
-              '/cars_page':(context)=>CarsPage(),
-              '/brands_page':(context)=>BrandsPage(),
-          
-          
-          
-          
-          
-            },
+home: CarDetails(),
+            // routes: {
+            //   '/': (context) => SplashScreen(),
+            //   '/onboarding': (context) => OnboardingScreen(),
+            //   '/login':(context)=>LoginScreen(),
+            //   '/sign_up':(context)=>SignUpScreen(),
+            //   '/main_screen':(context)=>MainScreen(),
+            //   '/home_screen':(context)=>HomeScreen(),
+            //   '/search_screen':(context)=>SearchScreen(),
+            //   '/profile_screen':(context)=>ProfileScreen(),
+            //   '/favorite_screen':(context)=>FavoriteScreen(),
+            //   '/cars_page':(context)=>CarsPage(),
+            //   '/brands_page':(context)=>BrandsPage(),
+            //   '/car_details':(context)=>CarDetails(),
+            // },
           ),
         );
       },

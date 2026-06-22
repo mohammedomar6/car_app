@@ -5,13 +5,18 @@ import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/features/auth/presentation/widgets/card_widget.dart';
 
 import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dart';
+import 'package:car_app/features/cars/data/models/car_response_model.dart';
 import 'package:car_app/features/home/presentation/widgets/card_car.dart';
 import 'package:car_app/features/home/presentation/widgets/container_brand.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../../../cars/presentation/manager/car_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-const  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -26,15 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
     AppImage.porsche,
     AppImage.bmw,
   ];
+
   @override
   void initState() {
-
     super.initState();
   }
-   @override
-  void dispose() {
 
-     searchController.dispose();
+  @override
+  void dispose() {
+    searchController.dispose();
     super.dispose();
   }
 
@@ -42,8 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+
         slivers: [
           SliverToBoxAdapter(
+
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
               child: TextFieldWidget(
@@ -63,9 +70,18 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  CardWidget(image: AppImage.sellCar, title: AppStrings.sellCar),
-                  CardWidget(image: AppImage.rentCar, title: AppStrings.rentCar),
-                  CardWidget(image: AppImage.finance, title: AppStrings.finance),
+                  CardWidget(
+                    image: AppImage.sellCar,
+                    title: AppStrings.sellCar,
+                  ),
+                  CardWidget(
+                    image: AppImage.rentCar,
+                    title: AppStrings.rentCar,
+                  ),
+                  CardWidget(
+                    image: AppImage.finance,
+                    title: AppStrings.finance,
+                  ),
                   CardWidget(
                     image: AppImage.concierge,
                     title: AppStrings.concierge,
@@ -108,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return ContainerBrand(image: cars[index],);
+                  return ContainerBrand(image: cars[index]);
                 },
               ),
             ),
@@ -125,7 +141,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed('/cars_page');
+                      context.pushNamedTransition(
+                        routeName: '/cars_page',
+                        type: PageTransitionType.leftToRight,
+                        duration: Duration(seconds: 2),
+                        curve: Curves.fastEaseInToSlowEaseOut,
+                      );
                     },
                     child: Text(
                       AppStrings.viewAll,
@@ -143,8 +164,33 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               index,
             ) {
-              return CardCar(name:  "Ferrari SF90 Straddle", price: 223.800, speed: 3.2, hp: 518);
+              return BlocBuilder<CarBloc, CarState>(
 
+  builder: (context, state) {
+
+    if(state is CarErrorState){
+      return Center(child: Text(state.message),);
+    }
+    else if(state is CarSuccessState){
+      CarResponseModel cars = state.cars[index];
+      return CardCar(
+        image: cars.imageUrls[0],
+        name: "${cars.brand} ${state.cars[index].model}",
+        price: cars.price,
+        speed: 3.2,
+        hp: 518,
+
+      );
+    }
+    else if(state is CarLoadingState){
+      return Center(child: CircularProgressIndicator(),);
+    }
+    else {
+      return SizedBox.shrink();
+    }
+
+  },
+);
             }),
           ),
         ],

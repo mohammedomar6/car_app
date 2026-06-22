@@ -13,6 +13,7 @@ import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginScreen extends StatelessWidget {
    LoginScreen({super.key});
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
         child: BlocConsumer<LoginBloc, LoginState>(
   listener: (context, state) {
     if(state is LoginSuccess){
-      Navigator.of(context).pushNamed("/main_screen");
+     context.pushNamedTransition(routeName: '/main_screen', type:PageTransitionType.bottomToTop,duration: Duration(seconds: 1) );
     }
     else if (state is LoginError){
       showDialog(context: context, builder: (context) {
