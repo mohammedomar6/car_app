@@ -1,3 +1,4 @@
+import 'package:car_app/features/cars/presentation/widgets/container_favorite_widget.dart';
 import 'package:car_app/features/home/presentation/widgets/card_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,18 +59,8 @@ class CardCar extends StatelessWidget {
               Positioned(
                 top: 12.h,
                 right: 5.w,
-                child: GlassBlurWidget(
-                  padding: 0.1.r,
-                  radius: 25.r,
-                  height: 50.h,
-                  width: 50.w,
-                  child: Center(
-                    child: Icon(
-                      AppIcon.favoriteOutLined,
-                      color: AppColors.backgroundLight,
-                    ),
-                  ),
-                ),
+                child:
+               ContainerFavoriteWidget(iconColor: AppColors.backgroundLight, radius: 25.r)
               ),
             ],
           ),

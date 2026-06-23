@@ -77,5 +77,9 @@ static String horsepower ="Horsepower";
 static String engine ="Engine";
 static String description ="Description";
 static String technical ="Technical Specs";
+static String fuelType ="Fuel Type";
+static String color ="Exterior Color";
+static String driveType ="Drive Type";
+static String spareType ="Spare Type";
 
 }

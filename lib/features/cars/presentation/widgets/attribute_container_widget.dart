@@ -24,6 +24,9 @@ class AttributeContainerWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         color: AppColors.w5,
+        border: Border.all(
+          color:AppColors.w5 ,
+        )
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

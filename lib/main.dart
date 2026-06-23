@@ -45,6 +45,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      minTextAdapt: true,
+       useInheritedMediaQuery: true,
+
       designSize: Size(390, 884),
       builder: (context, child) {
         return MultiBlocProvider(
@@ -61,21 +64,21 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationDelegates,
             locale: context.locale,
-home: CarDetails(),
-            // routes: {
-            //   '/': (context) => SplashScreen(),
-            //   '/onboarding': (context) => OnboardingScreen(),
-            //   '/login':(context)=>LoginScreen(),
-            //   '/sign_up':(context)=>SignUpScreen(),
-            //   '/main_screen':(context)=>MainScreen(),
-            //   '/home_screen':(context)=>HomeScreen(),
-            //   '/search_screen':(context)=>SearchScreen(),
-            //   '/profile_screen':(context)=>ProfileScreen(),
-            //   '/favorite_screen':(context)=>FavoriteScreen(),
-            //   '/cars_page':(context)=>CarsPage(),
-            //   '/brands_page':(context)=>BrandsPage(),
-            //   '/car_details':(context)=>CarDetails(),
-            // },
+
+            routes: {
+              '/': (context) => CarDetails(),
+              '/onboarding': (context) => OnboardingScreen(),
+              '/login':(context)=>LoginScreen(),
+              '/sign_up':(context)=>SignUpScreen(),
+              '/main_screen':(context)=>MainScreen(),
+              '/home_screen':(context)=>HomeScreen(),
+              '/search_screen':(context)=>SearchScreen(),
+              '/profile_screen':(context)=>ProfileScreen(),
+              '/favorite_screen':(context)=>FavoriteScreen(),
+              '/cars_page':(context)=>CarsPage(),
+              '/brands_page':(context)=>BrandsPage(),
+              '/car_details':(context)=>CarDetails(),
+            },
           ),
         );
       },

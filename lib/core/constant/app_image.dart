@@ -34,6 +34,10 @@ static String line='assets/image/onboarding/line.png';
   static String  arrowPro ='assets/image/profile/proIcon.png';
   static String  check ='assets/image/profile/check.png';
   static String  engine ='assets/image/car/engine.png';
+  static String  fuelType ='assets/image/car/fuelType.png';
+  static String  transmission ='assets/image/car/transmission.png';
+  static String  driveType ='assets/image/car/driveType.png';
+  static String  color ='assets/image/car/color.png';
 
 
 
