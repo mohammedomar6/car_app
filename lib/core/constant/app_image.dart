@@ -12,7 +12,7 @@ static String line='assets/image/onboarding/line.png';
   static String backgroundSignUp='assets/image/auth/create_account.png';
   // home
   static String ring='assets/image/main_screen/ring.png';
-  static String profile='assets/image/main_screen/Profile.png';
+
   static String sellCar ='assets/image/home/Container1.png';
   static String rentCar ='assets/image/home/Container2.png';
   static String finance ='assets/image/home/Container3.png';
@@ -38,6 +38,14 @@ static String line='assets/image/onboarding/line.png';
   static String  transmission ='assets/image/car/transmission.png';
   static String  driveType ='assets/image/car/driveType.png';
   static String  color ='assets/image/car/color.png';
+  static String  profile ='assets/image/profile/profile.png';
+  static String  profile1 ='assets/image/profile/profile1.png';
+  static String  location ='assets/image/profile/location.png';
+  static String  phone ="assets/image/profile/phone.png";
+  static String  lock ="assets/image/profile/lock.png";
+  static String  danger ="assets/image/profile/danger.png";
+  static String  delete ="assets/image/profile/delete.png";
+  static String  error ="assets/image/profile/error.png";
 
 
 

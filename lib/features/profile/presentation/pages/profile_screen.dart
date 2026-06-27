@@ -4,6 +4,7 @@ import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/core/utils/secure_storage.dart';
+import 'package:car_app/features/profile/presentation/widgets/circle_profile_widget.dart';
 import 'package:car_app/features/profile/presentation/widgets/container_profile.dart';
 import 'package:car_app/features/profile/presentation/widgets/field_profile.dart';
 import 'package:flutter/material.dart';
@@ -21,21 +22,7 @@ class ProfileScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Container(
-                  height: 132.h,
-                  width: 132.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomLeft,
-                      colors: [Color(0xffFF5722), Color(0xff333535)],
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset("assets/image/profile/personal.png"),
-                  ),
-                ),
+               CircleProfileWidget(image:"assets/image/profile/personal.png" ,height: 132.h,width: 132.w,),
                 SizedBox(height: 10.h),
                 Text(
                   "Alex Sterling",
@@ -56,14 +43,20 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
                 FieldProfile(
+                  onTap: (){
+                    Navigator.pushNamed(context, "/cars_in_garage");
+                  },
                   image: AppImage.garage,
                   text: AppStrings.carsInGarage,
                 ),
                 FieldProfile(image: AppImage.list, text: AppStrings.list),
                 FieldProfile(image: AppImage.history, text: AppStrings.history),
                 FieldProfile(
-                  image: AppImage.security,
-                  text: AppStrings.security,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/account_screen');
+                  },
+                  image: AppImage.profile,
+                text: AppStrings.account2,
                 ),
                 FieldProfile(image: AppImage.support, text: AppStrings.support),
 
@@ -81,11 +74,13 @@ class ProfileScreen extends StatelessWidget {
                             child: AlertDialog(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(color: AppColors.secondary.withOpacity(0.4)),
+                                side: BorderSide(
+                                  color: AppColors.secondary.withOpacity(0.4),
+                                ),
                               ),
 
-                               shadowColor: AppColors.secondary,
-                               elevation: 10,
+                              shadowColor: AppColors.secondary,
+                              elevation: 10,
                               surfaceTintColor: AppColors.containerBackground,
                               backgroundColor: AppColors.containerBackground,
                               icon: Container(

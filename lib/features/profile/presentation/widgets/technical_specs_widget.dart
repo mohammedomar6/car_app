@@ -10,8 +10,8 @@ class TechnicalSpecsWidget extends StatelessWidget {
   final String subtitle;
   @override
   Widget build(BuildContext context) {
-    return  Container(margin: EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),
-        width: 350.w,
+    return  Container(margin: EdgeInsets.symmetric(horizontal: 5.w,vertical: 8.h),
+        width: 370.w,
         height: 65.h,
         decoration: BoxDecoration(
             color: AppColors.w5,

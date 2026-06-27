@@ -58,16 +58,6 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           Image.asset(AppImage.ring),
           SizedBox(width: 10.w),
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(width: 0.2.r, color: AppColors.textAuth),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50.r),
-              child: Image.asset(AppImage.profile),
-            ),
-          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -39,6 +39,7 @@ static String  hint ='example@velocity.com';
 static String obscure ="********";
 static String create ="CREATE ";
 static String account ="ACCOUNT";
+static String account2 ="Account";
 static String fullName ="FULL NAME";
 static String phoneNumber ="PHONE NUMBER";
 static String hintName ="JOHN DOE";
@@ -65,7 +66,7 @@ static String support="Concierge Support";
 static String logOut="Logout";
 static String carsInGarage="Cars in Garage";
 static String activeListing="Active Listings";
-static String baseUrl="http://192.168.100.214:5222/api/";
+static String baseUrl="http://192.168.100.8:5222/api/";
 static Map<String,String> headerApi={
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -81,5 +82,16 @@ static String fuelType ="Fuel Type";
 static String color ="Exterior Color";
 static String driveType ="Drive Type";
 static String spareType ="Spare Type";
+static String  privacy ="Security & Privacy";
+static String  name ="Name";
+static String  location ="Location";
+static String  phone ="Phone";
+static String  privacySecurity ="Security & Privacy";
+static String  aboutAccount ="About Account";
+static String  editProfile ="Edit Profile";
+static String  changePassword ="Change Password";
+static String  danger ="DANGER ZONE";
+static String  delete ="Delete Account";
+
 
 }

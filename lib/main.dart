@@ -12,8 +12,11 @@ import 'package:car_app/features/favorites/presentation/pages/favorite_screen.da
 import 'package:car_app/features/cars/presentation/pages/cars_page.dart';
 
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
+import 'package:car_app/features/profile/presentation/pages/account/account_screen.dart';
+import 'package:car_app/features/profile/presentation/pages/garage/cars_in_garage.dart';
+
 import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
-import 'package:car_app/test.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
@@ -66,7 +69,7 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
 
             routes: {
-              '/': (context) => CarDetails(),
+              '/': (context) => SplashScreen(),
               '/onboarding': (context) => OnboardingScreen(),
               '/login':(context)=>LoginScreen(),
               '/sign_up':(context)=>SignUpScreen(),
@@ -78,6 +81,9 @@ class MyApp extends StatelessWidget {
               '/cars_page':(context)=>CarsPage(),
               '/brands_page':(context)=>BrandsPage(),
               '/car_details':(context)=>CarDetails(),
+              '/cars_in_garage':(context)=>CarsInGarage(),
+              '/account_screen':(context)=>AccountScreen(),
+
             },
           ),
         );

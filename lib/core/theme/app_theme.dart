@@ -1,6 +1,7 @@
 import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/theme/text_style_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
@@ -8,6 +9,9 @@ class AppTheme {
 
     fontFamily: 'Poppins',
     appBarTheme: AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(  systemStatusBarContrastEnforced: false,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarContrastEnforced: false,),
       backgroundColor: AppColors.backgroundAppbar,
       foregroundColor: AppColors.textAuth,
       elevation: 0.2.r,

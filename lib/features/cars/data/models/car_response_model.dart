@@ -1,6 +1,6 @@
-//To parse this JSON data, do
+// To parse this JSON data, do
 //
-//final carResponseModel = carResponseModelFromJson(jsonString);
+//     final carResponseModel = carResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -11,7 +11,7 @@ String carResponseModelToJson(List<CarResponseModel> data) => json.encode(List<d
 class CarResponseModel {
   int carId;
   int userId;
-  String brand;
+  int brandId;
   String model;
   int year;
   dynamic color;
@@ -24,15 +24,22 @@ class CarResponseModel {
   dynamic rentPricePerDay;
   String status;
   DateTime createdAt;
-  dynamic approvedBy;
+  int approvedBy;
   dynamic approvalNotes;
   dynamic approvalDate;
   List<String> imageUrls;
+  int cylinders;
+  String interiorColor;
+  int keysCount;
+  String driveType;
+  String region;
+  int horsepower;
+  int topSpeed;
 
   CarResponseModel({
     required this.carId,
     required this.userId,
-    required this.brand,
+    required this.brandId,
     required this.model,
     required this.year,
     required this.color,
@@ -49,12 +56,19 @@ class CarResponseModel {
     required this.approvalNotes,
     required this.approvalDate,
     required this.imageUrls,
+    required this.cylinders,
+    required this.interiorColor,
+    required this.keysCount,
+    required this.driveType,
+    required this.region,
+    required this.horsepower,
+    required this.topSpeed,
   });
 
   factory CarResponseModel.fromJson(Map<String, dynamic> json) => CarResponseModel(
     carId: json["carId"],
     userId: json["userId"],
-    brand: json["brand"],
+    brandId: json["brandId"],
     model: json["model"],
     year: json["year"],
     color: json["color"],
@@ -71,12 +85,19 @@ class CarResponseModel {
     approvalNotes: json["approvalNotes"],
     approvalDate: json["approvalDate"],
     imageUrls: List<String>.from(json["imageUrls"].map((x) => x)),
+    cylinders: json["cylinders"],
+    interiorColor: json["interiorColor"],
+    keysCount: json["keysCount"],
+    driveType: json["driveType"],
+    region: json["region"],
+    horsepower: json["horsepower"],
+    topSpeed: json["topSpeed"],
   );
 
   Map<String, dynamic> toJson() => {
     "carId": carId,
     "userId": userId,
-    "brand": brand,
+    "brandId": brandId,
     "model": model,
     "year": year,
     "color": color,
@@ -93,5 +114,12 @@ class CarResponseModel {
     "approvalNotes": approvalNotes,
     "approvalDate": approvalDate,
     "imageUrls": List<dynamic>.from(imageUrls.map((x) => x)),
+    "cylinders": cylinders,
+    "interiorColor": interiorColor,
+    "keysCount": keysCount,
+    "driveType": driveType,
+    "region": region,
+    "horsepower": horsepower,
+    "topSpeed": topSpeed,
   };
 }

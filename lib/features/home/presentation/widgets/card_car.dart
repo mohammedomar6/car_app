@@ -2,11 +2,9 @@ import 'package:car_app/features/cars/presentation/widgets/container_favorite_wi
 import 'package:car_app/features/home/presentation/widgets/card_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/app_icon.dart';
 import '../../../../core/constant/app_image.dart';
-import '../../../auth/presentation/widgets/glass_blur_widget.dart';
+
 
 class CardCar extends StatelessWidget {
   const CardCar({
@@ -14,10 +12,11 @@ class CardCar extends StatelessWidget {
     required this.name,
     required this.price,
     required this.speed,
-    required this.hp, required this.image,
+    required this.hp, required this.image, this.onPressed,
   });
 
   final String name;
+  final  void Function()? onPressed;
   final double price;
   final double speed;
   final double hp;
@@ -111,9 +110,7 @@ class CardCar extends StatelessWidget {
               height: 59.h,
               child: OutlinedButton(
 
-                onPressed: () {
-                  Navigator.pushNamed(context, '/car_details');
-                },
+                onPressed: onPressed,
                 child: Text("Details Of Car"),
               ),
             ),

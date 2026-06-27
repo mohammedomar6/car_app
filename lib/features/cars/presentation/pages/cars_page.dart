@@ -15,7 +15,11 @@ class CarsPage extends StatefulWidget {
 }
 
 class _CarsPageState extends State<CarsPage> {
-
+ @override
+  void initState() {
+    super.initState();
+    context.read<CarBloc>().add(GetAllCars());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +54,13 @@ class _CarsPageState extends State<CarsPage> {
                   itemCount: state.cars.length,
                   itemBuilder: (context, index) {
                     return CardCar(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/car_details',arguments: state.cars[index]);
+                      },
                       image: state.cars[index].imageUrls[0],
                       name:
-                          "${state.cars[index].brand}  ${state.cars[index].model}",
-                      price: state.cars[index].price,
+                          "${state.cars[index].brandId}  ${state.cars[index].model}",
+                      price: state.cars[index].price.toDouble(),
                       speed: 3.2,
                       hp: 518,
                     );

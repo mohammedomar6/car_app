@@ -175,8 +175,8 @@ class _HomeScreenState extends State<HomeScreen> {
       CarResponseModel cars = state.cars[index];
       return CardCar(
         image: cars.imageUrls[0],
-        name: "${cars.brand} ${state.cars[index].model}",
-        price: cars.price,
+        name: "${cars.brandId} ${state.cars[index].model}",
+        price: cars.price.toDouble(),
         speed: 3.2,
         hp: 518,
 
