@@ -34,6 +34,7 @@ class RemoteDataSourceCar {
   Future<List<CarResponseModel>> getMyCars() async{
    final response = await http.get(Uri.parse('${AppStrings.baseUrl}Cars/my-cars'),
         headers:await AppStrings.getHeaderApi());
+   print(response.statusCode);
    if(response.statusCode==200){
        List<dynamic> data = jsonDecode(response.body);
         return data.map((e) {

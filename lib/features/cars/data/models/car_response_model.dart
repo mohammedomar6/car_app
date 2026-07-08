@@ -24,7 +24,7 @@ class CarResponseModel {
   dynamic rentPricePerDay;
   String status;
   DateTime createdAt;
-  int approvedBy;
+
   dynamic approvalNotes;
   dynamic approvalDate;
   List<String> imageUrls;
@@ -52,7 +52,8 @@ class CarResponseModel {
     required this.rentPricePerDay,
     required this.status,
     required this.createdAt,
-    required this.approvedBy,
+
+
     required this.approvalNotes,
     required this.approvalDate,
     required this.imageUrls,
@@ -81,7 +82,7 @@ class CarResponseModel {
     rentPricePerDay: json["rentPricePerDay"],
     status: json["status"],
     createdAt: DateTime.parse(json["createdAt"]),
-    approvedBy: json["approvedBy"],
+
     approvalNotes: json["approvalNotes"],
     approvalDate: json["approvalDate"],
     imageUrls: List<String>.from(json["imageUrls"].map((x) => x)),
@@ -110,7 +111,7 @@ class CarResponseModel {
     "rentPricePerDay": rentPricePerDay,
     "status": status,
     "createdAt": createdAt.toIso8601String(),
-    "approvedBy": approvedBy,
+
     "approvalNotes": approvalNotes,
     "approvalDate": approvalDate,
     "imageUrls": List<dynamic>.from(imageUrls.map((x) => x)),

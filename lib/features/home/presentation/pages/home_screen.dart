@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../../../brand/presentation/manager/brands_bloc.dart';
 import '../../../cars/presentation/manager/car_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,13 +25,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
-
-  List<String> cars = [
-    AppImage.lamborghini,
-    AppImage.ferrari,
-    AppImage.porsche,
-    AppImage.bmw,
-  ];
 
   @override
   void initState() {
@@ -118,13 +112,28 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: SizedBox(
               height: 100.h,
-              child: ListView.builder(
+              child: BlocBuilder<BrandsBloc, BrandsState>(
+  builder: (context, state) {
+    if(state is GetAllBrandsLoading){
+      return Center(child: CircularProgressIndicator());
+    }
+   else if(state is GetAllBrandsError){
+     return Center(child: Text(state.massage),);
+    }
+   else if(state is GetAllBrandsSuccess){
+    return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return ContainerBrand(image: cars[index]);
+
+                  return ContainerBrand(image: 'http://192.168.0.108:5222${state.brands[index].brandLogoUrl!}' );
                 },
-              ),
+              );}
+   else{
+     return SizedBox.shrink();
+    }
+  },
+),
             ),
           ),
           SliverToBoxAdapter(
@@ -164,8 +173,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Center(child: Text(state.message)),
                 );
               } else if (state is CarSuccessState) {
+                if(state.cars.isEmpty ){
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height:60.h ,),
+                          Text("Cars not found",style: TextStyle(
+                            color: Colors.white
+                          ),),
+                        ],
+                      ),
+                    ),
+                  );
+                }
                 return SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
+                  delegate: SliverChildBuilderDelegate(childCount: 1,(context, index) {
                     CarResponseModel cars = state.cars[index];
                     return CardCar(
                       image: cars.imageUrls[0],

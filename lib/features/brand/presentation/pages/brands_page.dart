@@ -4,7 +4,6 @@ import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/features/auth/presentation/widgets/elevated_button_widget.dart';
 import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dart';
-import 'package:car_app/features/brand/data/models/brand_model.dart';
 import 'package:car_app/features/brand/data/models/brand_request_model.dart';
 import 'package:car_app/features/brand/presentation/manager/brands_bloc.dart';
 import 'package:car_app/features/home/presentation/widgets/container_brand.dart';
@@ -255,7 +254,7 @@ class _BrandsPageState extends State<BrandsPage> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: 20.r,
                       crossAxisSpacing: 10.r,
-                      childAspectRatio: 0.9,
+                      childAspectRatio: 0.75.r,
                       crossAxisCount: 3,
                     ),
                     itemBuilder: (context, index) {
@@ -263,6 +262,7 @@ class _BrandsPageState extends State<BrandsPage> {
                         image: 'http://192.168.0.108:5222${state.brands[index].brandLogoUrl!}',
                         text: state.brands[index].name,
                         onTap: () {
+
                           Navigator.pushNamed(context, '/cars_page', arguments: state.brands[index].brandId);
                         },
 

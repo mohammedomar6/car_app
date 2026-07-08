@@ -19,7 +19,7 @@ class CardCar extends StatelessWidget {
   final  void Function()? onPressed;
   final double price;
   final double speed;
-  final double hp;
+  final int hp;
   final String image;
 
   @override

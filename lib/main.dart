@@ -15,6 +15,8 @@ import 'package:car_app/features/favorites/presentation/pages/favorite_screen.da
 import 'package:car_app/features/cars/presentation/pages/cars_page.dart';
 
 import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
+import 'package:car_app/features/profile/data/data_sources/remote_data_source_profile.dart';
+import 'package:car_app/features/profile/presentation/manager/profile_bloc.dart';
 import 'package:car_app/features/profile/presentation/pages/account/account_screen.dart';
 import 'package:car_app/features/profile/presentation/pages/garage/cars_in_garage.dart';
 
@@ -61,7 +63,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => AuthBloc(RemoteDataSourceAuth()),),
             BlocProvider(create: (context) => LoginBloc(RemoteDataSourceAuth()),),
             BlocProvider(create: (context) => BrandsBloc(RemoteDataSourceBrand())..add(GetAllBrandsEvent()),),
-            BlocProvider(create: (context) => CarBloc(RemoteDataSourceCar())..add(GetAllCars()),)
+            BlocProvider(create: (context) => CarBloc(RemoteDataSourceCar())..add(GetAllCars()),),
+            BlocProvider(create: (context) => ProfileBloc(RemoteDataSourceProfile())..add(GetProfileEvent())),
           ],
           child: MaterialApp(
             theme:AppTheme.lightTheme,
