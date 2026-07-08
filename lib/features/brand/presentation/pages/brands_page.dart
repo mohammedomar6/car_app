@@ -253,7 +253,7 @@ class _BrandsPageState extends State<BrandsPage> {
                   return SliverGrid.builder(
                     itemCount: state.brands.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 10.r,
+                      mainAxisSpacing: 20.r,
                       crossAxisSpacing: 10.r,
                       childAspectRatio: 0.9,
                       crossAxisCount: 3,

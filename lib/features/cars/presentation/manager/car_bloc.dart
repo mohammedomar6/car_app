@@ -22,5 +22,14 @@ class CarBloc extends Bloc<CarEvent, CarState> {
          emit(CarErrorState(message: e.toString()));
       }
     },);
+    on<GetMyCars>((event, emit)async {
+      emit(MyCarsLoadingState());
+             try {
+               final  data =await remoteDataSourceCar.getMyCars();
+               emit(MyCarsSuccessState(myCars: data));
+             } on Exception catch (e) {
+                emit(MyCarsErrorState(massage: e.toString()));
+             }
+    },);
   }
 }
