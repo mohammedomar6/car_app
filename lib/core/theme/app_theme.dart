@@ -6,7 +6,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   static ThemeData get darkTheme => ThemeData(
+   dialogTheme: DialogThemeData(
+     titleTextStyle: TextStyleTheme.textThemeDark.displayLarge,
+     shape: RoundedRectangleBorder(
+       borderRadius: BorderRadius.circular(10),
+       side: BorderSide(
+         color: AppColors.secondary.withOpacity(0.4),
+       ),
+     ),
 
+     shadowColor: AppColors.secondary,
+     elevation: 10,
+     surfaceTintColor: AppColors.containerBackground,
+     backgroundColor: AppColors.containerBackground,
+   ),
     fontFamily: 'Poppins',
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(  systemStatusBarContrastEnforced: false,
@@ -70,6 +83,7 @@ class AppTheme {
     ),
   );
   static ThemeData lightTheme = ThemeData(
+
     scaffoldBackgroundColor: AppColors.backgroundLight,
     textTheme: TextStyleTheme.textThemeLight,
   );

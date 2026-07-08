@@ -66,7 +66,7 @@ static String support="Concierge Support";
 static String logOut="Logout";
 static String carsInGarage="Cars in Garage";
 static String activeListing="Active Listings";
-static String baseUrl="http://192.168.100.8:5222/api/";
+static String baseUrl="http://192.168.0.118:5222/api/";
 static Map<String,String> headerApi={
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -92,6 +92,18 @@ static String  editProfile ="Edit Profile";
 static String  changePassword ="Change Password";
 static String  danger ="DANGER ZONE";
 static String  delete ="Delete Account";
+  static Future<Map<String, String>> getHeaderApi() async {
+    final token = await SecureStorageService.getToken();
 
+    return {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+  }
+  static Future<String?> getRole()async{
+    final role =await SecureStorageService.getRole();
+    return role;
+  }
 
 }

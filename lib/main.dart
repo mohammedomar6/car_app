@@ -1,12 +1,15 @@
 import 'package:car_app/core/theme/app_theme.dart';
+import 'package:car_app/features/admin/presentation/pages/admin_panel_home_screen.dart';
 import 'package:car_app/features/auth/data/data_sources/remote_data_source_auth.dart';
 import 'package:car_app/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:car_app/features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:car_app/features/auth/presentation/pages/sign_up_screen.dart';
+import 'package:car_app/features/brand/data/data_sources/remote_data_source_brand.dart';
+import 'package:car_app/features/brand/presentation/manager/brands_bloc.dart';
 import 'package:car_app/features/cars/data/data_sources/remote_data_source_car.dart';
 import 'package:car_app/features/cars/presentation/manager/car_bloc.dart';
-import 'package:car_app/features/cars/presentation/pages/brands_page.dart';
+import 'package:car_app/features/brand/presentation/pages/brands_page.dart';
 import 'package:car_app/features/cars/presentation/pages/car_details.dart';
 import 'package:car_app/features/favorites/presentation/pages/favorite_screen.dart';
 import 'package:car_app/features/cars/presentation/pages/cars_page.dart';
@@ -57,6 +60,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => AuthBloc(RemoteDataSourceAuth()),),
             BlocProvider(create: (context) => LoginBloc(RemoteDataSourceAuth()),),
+            BlocProvider(create: (context) => BrandsBloc(RemoteDataSourceBrand())..add(GetAllBrandsEvent()),),
             BlocProvider(create: (context) => CarBloc(RemoteDataSourceCar())..add(GetAllCars()),)
           ],
           child: MaterialApp(
@@ -83,6 +87,7 @@ class MyApp extends StatelessWidget {
               '/car_details':(context)=>CarDetails(),
               '/cars_in_garage':(context)=>CarsInGarage(),
               '/account_screen':(context)=>AccountScreen(),
+              '/admin_panel_screen':(context)=>AdminPanelHomeScreen(),
 
             },
           ),

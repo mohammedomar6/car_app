@@ -1,7 +1,10 @@
+
+import 'package:car_app/core/constant/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
+import '../../../../core/constant/app_image.dart';
 
 class ContainerBrand extends StatelessWidget {
   const ContainerBrand({super.key, required this.image, this.text, this.onTap});
@@ -24,7 +27,7 @@ class ContainerBrand extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(image, width: 70.w),
+            Image.asset(AppImage.bmw, width: 70.w),
             text != null
                 ? Text(
                   text!,

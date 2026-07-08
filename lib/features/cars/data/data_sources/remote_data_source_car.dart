@@ -17,4 +17,15 @@ class RemoteDataSourceCar {
        }
 
  }
+ Future<List<CarResponseModel>>   getPendingCars() async{
+     final response = await http.get(Uri.parse('${AppStrings.baseUrl}Cars/pending-cars'),headers: AppStrings.headerApi);
+     if(response.statusCode==200){
+       List<dynamic> mapData =  jsonDecode(response.body);
+       return   mapData.map((e) => CarResponseModel.fromJson(e),).toList();
+     }
+     else{
+       throw Exception(jsonDecode(response.body));
+     }
+
+   }
 }

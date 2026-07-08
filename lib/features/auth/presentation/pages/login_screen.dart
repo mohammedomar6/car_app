@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 
 import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_icon.dart';
@@ -28,8 +28,16 @@ class LoginScreen extends StatelessWidget {
         key:  formKey,
         child: BlocConsumer<LoginBloc, LoginState>(
   listener: (context, state) {
-    if(state is LoginSuccess){
-     context.pushNamedTransition(routeName: '/main_screen', type:PageTransitionType.bottomToTop,duration: Duration(seconds: 1) );
+    if(state is LoginSuccess ){
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${state.responseModel.message} ${state.responseModel.role}'),));
+      if( state.responseModel.role=="Admin"){
+        context.pushNamedTransition(routeName: '/admin_panel_screen', type:PageTransitionType.bottomToTop,duration: Duration(seconds: 1) );
+      }
+      else {
+        context.pushNamedTransition(routeName: '/main_screen', type:PageTransitionType.bottomToTop,duration: Duration(seconds: 1) );
+      }
+
     }
     else if (state is LoginError){
       showDialog(context: context, builder: (context) {

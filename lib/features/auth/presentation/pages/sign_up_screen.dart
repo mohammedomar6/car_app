@@ -31,6 +31,10 @@ class SignUpScreen extends StatelessWidget {
   listener: (context, state) {
 
     if(state is RegisterSuccessState){
+      emailController.clear();
+      nameController.clear();
+      passwordController.clear();
+      phoneController.clear();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.registerResponseModel.message)));
     }
     else if(state is RegisterErrorState){

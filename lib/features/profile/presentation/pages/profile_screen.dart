@@ -72,17 +72,7 @@ class ProfileScreen extends StatelessWidget {
                           return BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                             child: AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(
-                                  color: AppColors.secondary.withOpacity(0.4),
-                                ),
-                              ),
 
-                              shadowColor: AppColors.secondary,
-                              elevation: 10,
-                              surfaceTintColor: AppColors.containerBackground,
-                              backgroundColor: AppColors.containerBackground,
                               icon: Container(
                                 height: 64.h,
                                 width: 64.w,

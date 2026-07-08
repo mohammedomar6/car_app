@@ -47,10 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-
         slivers: [
           SliverToBoxAdapter(
-
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
               child: TextFieldWidget(
@@ -159,39 +157,33 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(childCount: 2, (
-              context,
-              index,
-            ) {
-              return BlocBuilder<CarBloc, CarState>(
-
-  builder: (context, state) {
-
-    if(state is CarErrorState){
-      return Center(child: Text(state.message),);
-    }
-    else if(state is CarSuccessState){
-      CarResponseModel cars = state.cars[index];
-      return CardCar(
-        image: cars.imageUrls[0],
-        name: "${cars.brandId} ${state.cars[index].model}",
-        price: cars.price.toDouble(),
-        speed: 3.2,
-        hp: 518,
-
-      );
-    }
-    else if(state is CarLoadingState){
-      return Center(child: CircularProgressIndicator(),);
-    }
-    else {
-      return SizedBox.shrink();
-    }
-
-  },
-);
-            }),
+          BlocBuilder<CarBloc, CarState>(
+            builder: (context, state) {
+              if (state is CarErrorState) {
+                return SliverToBoxAdapter(
+                  child: Center(child: Text(state.message)),
+                );
+              } else if (state is CarSuccessState) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    CarResponseModel cars = state.cars[index];
+                    return CardCar(
+                      image: cars.imageUrls[0],
+                      name: "${cars.brandId} ${state.cars[index].model}",
+                      price: cars.price.toDouble(),
+                      speed: 3.2,
+                      hp: 518,
+                    );
+                  }),
+                );
+              } else if (state is CarLoadingState) {
+                return SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              } else {
+                return SliverToBoxAdapter(child: SizedBox.shrink());
+              }
+            },
           ),
         ],
       ),

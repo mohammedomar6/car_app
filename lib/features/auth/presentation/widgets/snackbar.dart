@@ -14,6 +14,7 @@ class AppSnackBar {
       Overlay.of(context),
       curve: Curves.fastEaseInToSlowEaseOut,
       CustomSnackBar.success(
+
         backgroundColor: Colors.black,
         boxShadow: [
           BoxShadow(
