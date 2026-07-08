@@ -27,7 +27,7 @@ class ContainerBrand extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(AppImage.bmw, width: 70.w),
+            Image.network(image, width: 70.w,),
             text != null
                 ? Text(
                   text!,

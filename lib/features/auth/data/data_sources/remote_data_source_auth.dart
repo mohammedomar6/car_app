@@ -29,6 +29,7 @@ class RemoteDataSourceAuth {
      Map<String,dynamic>map=  jsonDecode(response.body);
      LoginResponseModel responseModel = LoginResponseModel.fromJson(map);
    await  SecureStorageService.saveToken(responseModel.token);
+   await  SecureStorageService.saveRole(responseModel.role);
      return responseModel;
      }else{
        throw Exception(jsonDecode(response.body).toString());

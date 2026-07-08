@@ -260,7 +260,7 @@ class _BrandsPageState extends State<BrandsPage> {
                     ),
                     itemBuilder: (context, index) {
                       return ContainerBrand(
-                        image: state.brands[index].brandLogoUrl!,
+                        image: 'http://192.168.0.108:5222${state.brands[index].brandLogoUrl!}',
                         text: state.brands[index].name,
                         onTap: () {
                           Navigator.pushNamed(context, '/cars_page', arguments: state.brands[index].brandId);
