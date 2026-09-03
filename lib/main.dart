@@ -1,26 +1,25 @@
 import 'package:car_app/core/theme/app_theme.dart';
-import 'package:car_app/features/admin/presentation/pages/admin_panel_home_screen.dart';
+import 'package:car_app/core/routes/app_router.dart';
+import 'package:car_app/core/routes/app_routes.dart';
+import 'package:car_app/features/admin/data/data_sources/remote_data_source_admin.dart';
+import 'package:car_app/features/admin/presentation/manager/approve_car/approve_car_bloc.dart';
+import 'package:car_app/features/admin/presentation/manager/users/users_bloc.dart';
 import 'package:car_app/features/auth/data/data_sources/remote_data_source_auth.dart';
 import 'package:car_app/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:car_app/features/auth/presentation/manager/login_bloc/login_bloc.dart';
-import 'package:car_app/features/auth/presentation/pages/login_screen.dart';
-import 'package:car_app/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:car_app/features/brand/data/data_sources/remote_data_source_brand.dart';
 import 'package:car_app/features/brand/presentation/manager/brands_bloc.dart';
 import 'package:car_app/features/cars/data/data_sources/remote_data_source_car.dart';
 import 'package:car_app/features/cars/presentation/manager/car_bloc.dart';
-import 'package:car_app/features/brand/presentation/pages/brands_page.dart';
-import 'package:car_app/features/cars/presentation/pages/car_details.dart';
-import 'package:car_app/features/favorites/presentation/pages/favorite_screen.dart';
-import 'package:car_app/features/cars/presentation/pages/cars_page.dart';
-
-import 'package:car_app/features/onbording/presentation/pages/onboarding_screen.dart';
+import 'package:car_app/features/cars/presentation/manager/pending_cars_bloc.dart';
+import 'package:car_app/features/favorites/data/data_sources/favorite_remote_data_source.dart';
+import 'package:car_app/features/favorites/presentation/manager/favorite_bloc.dart';
+import 'package:car_app/features/orders/data/data_sources/order_remote_data_source.dart';
+import 'package:car_app/features/orders/presentation/manager/order_bloc.dart';
+import 'package:car_app/features/transactions/data/data_sources/transaction_remote_data_source.dart';
+import 'package:car_app/features/transactions/presentation/manager/transaction_bloc.dart';
 import 'package:car_app/features/profile/data/data_sources/remote_data_source_profile.dart';
 import 'package:car_app/features/profile/presentation/manager/profile_bloc.dart';
-import 'package:car_app/features/profile/presentation/pages/account/account_screen.dart';
-import 'package:car_app/features/profile/presentation/pages/garage/cars_in_garage.dart';
-
-import 'package:car_app/features/splash/presentation/pages/splash_screen.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 
@@ -28,21 +27,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'features/home/presentation/pages/home_screen.dart';
-import 'features/main_screen/presentation/pages/main_screen.dart';
-import 'features/profile/presentation/pages/profile_screen.dart';
-import 'features/search/presentation/pages/search_screen.dart';
-
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-      startLocale: Locale('en'),
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
+      useOnlyLangCode: true,
       saveLocale: true,
-
       path: "assets/translation",
-      supportedLocales: [Locale('en'), Locale('ar')],
-      child: MyApp(),
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      child: const MyApp(),
     ),
   );
 }
@@ -54,45 +50,78 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       minTextAdapt: true,
-       useInheritedMediaQuery: true,
+      useInheritedMediaQuery: true,
 
       designSize: Size(390, 884),
       builder: (context, child) {
+        final fontFamily =
+            context.locale.languageCode == 'ar' ? 'Alexandria' : 'Poppins';
+        final lightTheme = AppTheme.lightTheme;
+        final darkTheme = AppTheme.darkTheme;
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => AuthBloc(RemoteDataSourceAuth()),),
-            BlocProvider(create: (context) => LoginBloc(RemoteDataSourceAuth()),),
-            BlocProvider(create: (context) => BrandsBloc(RemoteDataSourceBrand())..add(GetAllBrandsEvent()),),
-            BlocProvider(create: (context) => CarBloc(RemoteDataSourceCar())..add(GetAllCars()),),
-            BlocProvider(create: (context) => ProfileBloc(RemoteDataSourceProfile())..add(GetProfileEvent())),
+            BlocProvider(create: (context) => AuthBloc(RemoteDataSourceAuth())),
+            BlocProvider(create: (context) => ApproveCarBloc(remoteDataSourceAdmin: RemoteDataSourceAdmin())),
+            BlocProvider(
+              create:
+                  (context) => FavoriteBloc(
+                    remoteDataSource: FavoriteRemoteDataSourceImpl(),
+                  ),
+            ),
+            BlocProvider(
+              create:
+                  (context) => PendingCarsBloc(
+                    remoteDataSourceAdmin: RemoteDataSourceAdmin(),
+                  ),
+            ),
+            BlocProvider(
+              create: (context) => LoginBloc(RemoteDataSourceAuth()),
+            ),
+            BlocProvider(
+              create:
+                  (context) =>
+                      BrandsBloc(RemoteDataSourceBrand())
+                        ..add(GetAllBrandsEvent()),
+            ),
+            BlocProvider(
+              create:
+                  (context) =>
+                      CarBloc(RemoteDataSourceCar())..add(GetAllCars()),
+            ),
+            BlocProvider(
+              create:
+                  (context) =>
+                      ProfileBloc(RemoteDataSourceProfile())
+                        ..add(GetProfileEvent()),
+            ),
+            BlocProvider(
+              create: (context) => UsersBloc(RemoteDataSourceAdmin()),
+            ),
+            BlocProvider(
+              create: (context) => OrderBloc(OrderRemoteDataSource()),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  TransactionBloc(TransactionRemoteDataSource()),
+            ),
           ],
           child: MaterialApp(
-            theme:AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
+            theme: lightTheme.copyWith(
+              textTheme: lightTheme.textTheme.apply(fontFamily: fontFamily),
+            ),
+            darkTheme: darkTheme.copyWith(
+              textTheme: darkTheme.textTheme.apply(fontFamily: fontFamily),
+              primaryTextTheme:
+                  darkTheme.primaryTextTheme.apply(fontFamily: fontFamily),
+            ),
             themeMode: ThemeMode.dark,
             debugShowCheckedModeBanner: false,
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationDelegates,
             locale: context.locale,
-
-            routes: {
-              '/': (context) => SplashScreen(),
-              '/onboarding': (context) => OnboardingScreen(),
-              '/login':(context)=>LoginScreen(),
-              '/sign_up':(context)=>SignUpScreen(),
-              '/main_screen':(context)=>MainScreen(),
-              '/home_screen':(context)=>HomeScreen(),
-              '/search_screen':(context)=>SearchScreen(),
-              '/profile_screen':(context)=>ProfileScreen(),
-              '/favorite_screen':(context)=>FavoriteScreen(),
-              '/cars_page':(context)=>CarsPage(),
-              '/brands_page':(context)=>BrandsPage(),
-              '/car_details':(context)=>CarDetails(),
-              '/cars_in_garage':(context)=>CarsInGarage(),
-              '/account_screen':(context)=>AccountScreen(),
-              '/admin_panel_screen':(context)=>AdminPanelHomeScreen(),
-
-            },
+            initialRoute: AppRoutes.splash,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            onUnknownRoute: AppRouter.onUnknownRoute,
           ),
         );
       },

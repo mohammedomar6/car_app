@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextStyleTheme {
   static final TextTheme textThemeLight = TextTheme();
   static final TextTheme textThemeDark = TextTheme(
+    bodyLarge: TextStyle(fontSize: 16.sp, color: AppColors.backgroundLight),
+    bodyMedium: TextStyle(fontSize: 14.sp, color: AppColors.backgroundLight),
     displayLarge: TextStyle(
       fontWeight: FontWeight.bold,
       color: AppColors.backgroundLight,
@@ -16,7 +18,8 @@ class TextStyleTheme {
       color: AppColors.secondary,
       fontSize: 36.sp,
     ),
-    headlineSmall: TextStyle(color: AppColors.backgroundDark, fontSize: 18.sp),
+    headlineMedium: TextStyle(color: AppColors.backgroundLight, fontSize: 20.sp),
+    headlineSmall: TextStyle(color: AppColors.backgroundLight, fontSize: 18.sp),
     bodySmall: TextStyle(fontSize: 12.sp, color: AppColors.textAuth),
     displaySmall: TextStyle(fontSize: 16.sp, color: AppColors.textFieldFont),
     titleLarge: TextStyle(
@@ -29,6 +32,17 @@ class TextStyleTheme {
       fontSize: 22.sp,
       color: AppColors.backgroundLight,
     ),
+    titleSmall: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 16.sp,
+      color: AppColors.backgroundLight,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 14.sp,
+      color: AppColors.backgroundLight,
+      fontWeight: FontWeight.w700,
+    ),
+    labelSmall: TextStyle(fontSize: 11.sp, color: Colors.white54),
     labelMedium: TextStyle(
       fontSize: 25.sp,
       color: AppColors.backgroundLight,

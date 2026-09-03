@@ -1,0 +1,16 @@
+CarImagesAPI integration
+========================
+
+Implemented:
+- Vehicle photo suggestions are fetched from CarImagesAPI using brand + model + year.
+- Up to 8 camera angles are requested in one batch call.
+- Tapping a suggested image downloads it temporarily, then the existing Add/Edit Car multipart flow uploads it to your backend.
+- Manual image selection remains available and can be mixed with API images.
+- Brand logo URL helper now uses the documented /api/v1/makes/{slug}/logo endpoint.
+- The API secret is intentionally not embedded in Flutter. The signed-url browser flow only needs the API key.
+
+API key override (optional):
+flutter run --dart-define=CAR_IMAGES_API_KEY=ci_xxx
+
+Important limitation:
+CarImagesAPI provides vehicle images/catalog metadata, not full mechanical specifications. Fields such as horsepower, cylinders, fuel type, gearbox, drive type and top speed still need a dedicated vehicle-specifications API (or your own backend database) for reliable autofill.

@@ -49,7 +49,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           width: double.infinity,
           child: TextFormField(
             controller: widget.controller,
-autovalidateMode:AutovalidateMode.disabled ,
+            autovalidateMode: AutovalidateMode.disabled,
             validator: widget.validator,
             obscureText: widget.isPassword ? obscureText : false,
             keyboardType: widget.type,
@@ -75,7 +75,10 @@ autovalidateMode:AutovalidateMode.disabled ,
 
               prefixIcon: Icon(widget.icon),
             ),
-            style: Theme.of(context).textTheme.bodySmall,
+            cursorColor: AppColors.secondary,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white,
+            ),
             showCursor: true,
 
           ),

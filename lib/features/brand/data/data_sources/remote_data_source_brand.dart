@@ -8,70 +8,146 @@ import 'package:car_app/features/brand/data/models/delete_brand_response_model.d
 import 'package:http/http.dart' as http;
 
 class RemoteDataSourceBrand {
+  // ============================================================
+  // GET ALL BRANDS
+  // ============================================================
+
   Future<List<BrandModel>> getBrands() async {
     final response = await http.get(
-      Uri.parse('${AppStrings.baseUrl}Brands/All-Brands'),
+      Uri.parse(
+        '${AppStrings.baseUrl}Brands/All-Brands',
+      ),
       headers: AppStrings.headerApi,
     );
+
     if (response.statusCode == 200) {
-      final List<dynamic> mapDate = jsonDecode(response.body);
-      return mapDate.map((e) {
-        return BrandModel.fromJson(e);
-      }).toList();
-    } else {
-      throw Exception(jsonDecode(response.body));
+      final List<dynamic> data = jsonDecode(response.body);
+
+      return data
+          .map((e) => BrandModel.fromJson(e))
+          .toList();
     }
+
+    throw Exception(response.body);
   }
 
+  // ============================================================
+  // ADD BRAND
+  // ============================================================
 
-  Future<AddBrandModel> addBrand(BrandRequestModel request) async {
-    print(request.imageFile);
-    var multipartRequest = http.MultipartRequest(
-      "POST",
-      Uri.parse("${AppStrings.baseUrl}Brands"),
+  Future<AddBrandModel> addBrand(
+      BrandRequestModel request,
+      ) async {
+    final multipartRequest = http.MultipartRequest(
+      'POST',
+      Uri.parse(
+        '${AppStrings.baseUrl}Brands',
+      ),
     );
 
-    // Headers
-    multipartRequest.headers.addAll(await AppStrings.getHeaderApi());
+    multipartRequest.headers.addAll(
+      await AppStrings.getHeaderApi(),
+    );
 
-    // البيانات النصية
-    multipartRequest.fields["BrandName"] = request.brandName!;
+    multipartRequest.fields['BrandName'] =
+        request.brandName;
 
-
-    // الصورة
-    if (request.imageFile != null && request.imageFile.path.isNotEmpty) {
+    if (request.imageFile != null) {
       multipartRequest.files.add(
         await http.MultipartFile.fromPath(
-          "ImageFile", // يجب أن يكون نفس الاسم الموجود في الـ API
-          request.imageFile.path,
+          'ImageFile',
+          request.imageFile!.path,
         ),
       );
     }
 
-    // إرسال الطلب
-    final streamedResponse = await multipartRequest.send();
+    final streamedResponse =
+    await multipartRequest.send();
 
-    // تحويل Stream إلى Response
-    final response = await http.Response.fromStream(streamedResponse);
+    final response =
+    await http.Response.fromStream(
+      streamedResponse,
+    );
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> mapData = jsonDecode(response.body);
-      return AddBrandModel.fromJson(mapData);
-    } else {
-      throw Exception(response.body);
+      return AddBrandModel.fromJson(
+        jsonDecode(response.body),
+      );
     }
+
+    throw Exception(response.body);
   }
 
-  Future<DeleteBrandResponseModel> deleteBrand(int id) async {
-    final response = await http.delete(
-      Uri.parse("${AppStrings.baseUrl}Brands/$id"),
-      headers: AppStrings.headerApi,
+  // ============================================================
+  // EDIT BRAND
+  // ============================================================
+
+  Future<AddBrandModel> editBrand(
+      int brandId,
+      BrandRequestModel request,
+      ) async {
+    final multipartRequest = http.MultipartRequest(
+      'PUT',
+      Uri.parse(
+        '${AppStrings.baseUrl}Brands/$brandId',
+      ),
     );
-    if (response.statusCode == 200) {
-      Map<String, dynamic> mapDate = jsonDecode(response.body);
-      return DeleteBrandResponseModel.fromJson(mapDate);
-    } else {
-      throw Exception(jsonDecode(response.body));
+
+    multipartRequest.headers.addAll(
+      await AppStrings.getHeaderApi(),
+    );
+
+    // Brand name is always required
+    multipartRequest.fields['BrandName'] =
+        request.brandName;
+
+    // Image is OPTIONAL during edit
+    if (request.imageFile != null) {
+      multipartRequest.files.add(
+        await http.MultipartFile.fromPath(
+          'ImageFile',
+          request.imageFile!.path,
+        ),
+      );
     }
+
+    final streamedResponse =
+    await multipartRequest.send();
+
+    final response =
+    await http.Response.fromStream(
+      streamedResponse,
+    );
+
+    if (response.statusCode == 200) {
+      return AddBrandModel.fromJson(
+        jsonDecode(response.body),
+      );
+    }
+
+    throw Exception(response.body);
+  }
+
+  // ============================================================
+  // DELETE BRAND
+  // ============================================================
+
+  Future<DeleteBrandResponseModel> deleteBrand(
+      int brandId,
+      ) async {
+    final response = await http.delete(
+      Uri.parse(
+        '${AppStrings.baseUrl}Brands/$brandId',
+      ),
+      headers: await AppStrings.getHeaderApi(),
+    );
+
+    if (response.statusCode == 200) {
+      return DeleteBrandResponseModel.fromJson(
+        jsonDecode(response.body),
+      );
+    }
+
+    throw Exception(response.body);
   }
 }

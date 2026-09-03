@@ -40,4 +40,11 @@ class SecureStorageService {
       key: 'role',
     );
   }
+
+  static Future<void> clearSession() async {
+    await Future.wait([
+      deleteToken(),
+      deleteRole(),
+    ]);
+  }
 }

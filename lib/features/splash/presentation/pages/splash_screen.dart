@@ -3,6 +3,7 @@ import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/core/constant/gradient_text.dart';
+import 'package:car_app/core/routes/app_routes.dart';
 import 'package:car_app/core/utils/secure_storage.dart';
 
 import 'package:flutter/material.dart';
@@ -20,24 +21,32 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    goNext();
     super.initState();
+    _goNext();
   }
 
-  void goNext() async {
-    await Future.delayed(Duration(seconds: 3));
-    if (await SecureStorageService.getToken() == null) {
-      Navigator.of(context).pushNamed('/login');
-    }
-    else if (await SecureStorageService.getToken() != null) {
-      if (await SecureStorageService.getRole() == "Admin") {
-        Navigator.of(context).pushNamed("/admin_panel_screen");
-      }
-      else {
-        Navigator.of(context).pushNamed('/main_screen');
-      }
+  Future<void> _goNext() async {
+    final session = await Future.wait([
+      SecureStorageService.getToken(),
+      SecureStorageService.getRole(),
+      Future<String?>.delayed(const Duration(seconds: 3)),
+    ]);
+
+    if (!mounted) return;
+
+    final token = session[0]?.trim();
+    final role = session[1]?.trim().toLowerCase();
+    if (token == null || token.isEmpty) {
+      await SecureStorageService.clearSession();
+      if (!mounted) return;
+      AppNavigator.replaceAll(context, AppRoutes.login);
+      return;
     }
 
+    AppNavigator.replaceAll(
+      context,
+      role == 'admin' ? AppRoutes.adminPanel : AppRoutes.main,
+    );
   }
 
 

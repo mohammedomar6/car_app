@@ -15,7 +15,7 @@ class ProfileResponseModel {
   final String? phone;
   final String? address;
   final String? role;
-  final DateTime? createdAt;
+
 
   ProfileResponseModel({
      this.userId,
@@ -24,17 +24,17 @@ class ProfileResponseModel {
      this.phone,
      this.address,
      this.role,
-     this.createdAt,
+
   });
 
   factory ProfileResponseModel.fromJson(Map<String, dynamic> json) => ProfileResponseModel(
-    userId: json["userId"],
-    fullName: json["fullName"],
-    email: json["email"],
-    phone: json["phone"],
-    address: json["address"],
-    role: json["role"],
-    createdAt: DateTime.parse(json["createdAt"]),
+    userId: _asNullableInt(json["userId"] ?? json["id"]),
+    fullName: (json["fullName"] ?? json["name"] ?? json["userName"])?.toString(),
+    email: json["email"]?.toString(),
+    phone: (json["phone"] ?? json["phoneNumber"])?.toString(),
+    address: (json["address"] ?? json["location"])?.toString(),
+    role: (json["role"] ?? json["userRole"])?.toString(),
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +44,13 @@ class ProfileResponseModel {
     "phone": phone,
     "address": address,
     "role": role,
-    "createdAt": createdAt!.toIso8601String(),
+
   };
+}
+
+int? _asNullableInt(dynamic value) {
+  if (value == null) return null;
+  if (value is int) return value;
+  if (value is num) return value.toInt();
+  return int.tryParse(value.toString());
 }

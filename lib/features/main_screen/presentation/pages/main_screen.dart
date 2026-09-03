@@ -3,11 +3,16 @@ import 'package:car_app/core/constant/app_icon.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
 import 'package:car_app/features/favorites/presentation/pages/favorite_screen.dart';
+import 'package:car_app/features/favorites/presentation/manager/favorite_bloc.dart';
+import 'package:car_app/features/favorites/presentation/manager/favorite_event.dart';
+import 'package:car_app/features/favorites/presentation/manager/favorite_state.dart';
 import 'package:car_app/features/home/presentation/pages/home_screen.dart';
 import 'package:car_app/features/profile/presentation/pages/profile_screen.dart';
 import 'package:car_app/features/search/presentation/pages/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../cars/presentation/manager/car_bloc.dart';
 import '../../data/models/bottom_navigation_bar_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,7 +25,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
-  List<BottomNavigationBarModel> navigation = [
+  @override
+  void initState() {
+    super.initState();
+    context.read<FavoriteBloc>().add(const GetMyFavoritesEvent());
+  }
+
+  List<BottomNavigationBarModel> get navigation => [
     BottomNavigationBarModel(
       title: AppStrings.home,
       icon: AppIcon.home,
@@ -45,7 +56,20 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<FavoriteBloc, FavoriteState>(
+      listenWhen: (previous, current) =>
+          previous.toggleStatus != current.toggleStatus &&
+          current.toggleStatus == FavoriteStatus.failure,
+      listener: (context, state) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(state.message),
+            backgroundColor: Colors.red.shade700,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      },
+      child: Scaffold(
       appBar: AppBar(
         leading: Icon(AppIcon.menu),
         title: Text(
@@ -66,6 +90,9 @@ class _MainScreenState extends State<MainScreen> {
           setState(() {
             currentIndex = value;
           });
+          if (value == 0) {
+            context.read<CarBloc>().add(GetAllCars());
+          }
         },
         items:
         navigation
@@ -78,7 +105,8 @@ class _MainScreenState extends State<MainScreen> {
         )
             .toList(),
       ),
-      body: navigation[currentIndex].page,
+        body: navigation[currentIndex].page,
+      ),
     );
   }
 }

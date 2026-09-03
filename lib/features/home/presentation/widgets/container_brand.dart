@@ -20,6 +20,7 @@ class ContainerBrand extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 7.w),
         width: 90.w,
+
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           color: AppColors.backgroundLight.withOpacity(0.05),
@@ -27,14 +28,15 @@ class ContainerBrand extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-     Image.network(image, width: 50.w,errorBuilder: (context, error, stackTrace) {
+     Image.network(height: 80,image,width: 50.w,errorBuilder: (context, error, stackTrace) {
                   return Image.asset(AppImage.bmw,);
      },),
+            SizedBox(height: 15.h,),
             text != null
                 ? Text(
                   text!,
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                    fontSize: 9.sp,
+                    fontSize: 10.sp,
                     color: AppColors.textAuth,
                   ),
                 )

@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_icon.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
+import 'package:car_app/core/routes/app_routes.dart';
 import 'package:car_app/core/utils/app_utils.dart';
 import 'package:car_app/features/auth/data/models/register_request_model.dart';
 import 'package:car_app/features/auth/presentation/manager/auth_bloc.dart';
@@ -112,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
                             color: AppColors.darkGrey,
                             validator: (p0) {
                               if (p0!.isEmpty) {
-                                return "Enter name";
+                                return 'extra_044'.tr();
                               } else {
                                 return null;
                               }
@@ -130,7 +132,7 @@ class SignUpScreen extends StatelessWidget {
                             label: AppStrings.email,
                             validator: (p0) {
                               if (!AppUtils.isValidEmail(p0!)) {
-                                return "Enter email valid";
+                                return 'extra_043'.tr();
                               } else {
                                 return null;
                               }
@@ -145,7 +147,7 @@ class SignUpScreen extends StatelessWidget {
                             controller: phoneController,
                             validator: (p0) {
                               if (p0!.isEmpty) {
-                                return "Enter phone";
+                                return 'extra_047'.tr();
                               } else {
                                 return null;
                               }
@@ -161,9 +163,9 @@ class SignUpScreen extends StatelessWidget {
                             controller: passwordController,
                             validator: (p0) {
                               if (p0!.isEmpty) {
-                                return "Enter password";
+                                return 'extra_046'.tr();
                               } else if (p0.length < 8) {
-                                return " password less than 8";
+                                return 'extra_001'.tr();
                               } else {
                                 return null;
                               }
@@ -188,7 +190,7 @@ class SignUpScreen extends StatelessWidget {
                                     fullName: nameController.text,
                                     email: emailController.text,
                                     password: passwordController.text,
-                                    role: "user",
+                                    role: "User",
                                     phone: phoneController.text,
                                     address: "54465dgg",
                                   ),
@@ -212,7 +214,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(context, '/login');
+                              AppNavigator.replaceAll(context, AppRoutes.login);
                             },
                             child: Text(AppStrings.signIn),
                           ),

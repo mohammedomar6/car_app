@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/app_image.dart';
 import '../../../../core/constant/app_strings.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../data/onboarding_data.dart';
 
 class OnboardingItem extends StatelessWidget {
@@ -98,7 +99,7 @@ final PageController controller ;
                     )
                         : OutlinedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/login');
+                        AppNavigator.replaceAll(context, AppRoutes.login);
                       },
                       child: Text(AppStrings.start),
                     ),

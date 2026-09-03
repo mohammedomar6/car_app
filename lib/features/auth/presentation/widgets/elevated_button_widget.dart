@@ -7,14 +7,14 @@ class ElevatedButtonWidget extends StatelessWidget {
     required this.height,
     required this.onPressed,
     required this.label,
-    required this.icon,
+     this.icon,
   });
 
   final double width;
   final double height;
   final VoidCallback onPressed;
   final String label;
-  final IconData icon;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ElevatedButtonWidget extends StatelessWidget {
           label,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        icon: Icon(icon),
+        icon: icon==null?SizedBox.shrink(): Icon(icon),
       ),
     );
   }

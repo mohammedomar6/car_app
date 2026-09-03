@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:car_app/features/brand/presentation/pages/brands_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ import 'package:car_app/features/search/presentation/pages/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../main_screen/data/models/bottom_navigation_bar_model.dart';
+import 'admin_home_screen.dart';
 
 
 class AdminPanelHomeScreen extends StatefulWidget {
@@ -24,11 +26,11 @@ class AdminPanelHomeScreen extends StatefulWidget {
 class _MainScreenState extends State<AdminPanelHomeScreen> {
   int _currentIndex = 0;
 
-  List<BottomNavigationBarModel> navigation = [
+  List<BottomNavigationBarModel> get navigation => [
     BottomNavigationBarModel(
       title: AppStrings.home,
       icon: AppIcon.home,
-      page: HomeScreen(),
+      page: AdminHomeScreen(),
     ),
     BottomNavigationBarModel(
       title: AppStrings.search,
@@ -36,7 +38,7 @@ class _MainScreenState extends State<AdminPanelHomeScreen> {
       page: SearchScreen(),
     ),
     BottomNavigationBarModel(
-      title:"Brands",
+      title:'ui_052'.tr(),
       icon: Icons.car_crash,
       page: BrandsPage(),
     ),

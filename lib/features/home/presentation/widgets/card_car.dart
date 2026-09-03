@@ -1,20 +1,25 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:car_app/features/cars/presentation/widgets/container_favorite_widget.dart';
 import 'package:car_app/features/home/presentation/widgets/card_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/app_image.dart';
+import '../../../cars/data/models/car_response_model.dart';
 
 
 class CardCar extends StatelessWidget {
-  const CardCar({
+  CardCar({
     super.key,
+    required this.car,
     required this.name,
     required this.price,
     required this.speed,
-    required this.hp, required this.image, this.onPressed,
+    required this.hp,
+    required this.image,
+    this.onPressed,
   });
-
+  final CarResponseModel car;
   final String name;
   final  void Function()? onPressed;
   final double price;
@@ -42,24 +47,27 @@ class CardCar extends StatelessWidget {
                   topLeft: Radius.circular(20.r),
                   topRight: Radius.circular(20.r),
                 ),
-                child: Image.network(
-                  image,
-                  width: double.infinity,
-                  height: 256.h,
-                  errorBuilder: (context, error, stackTrace) {
-                    return SizedBox(
+                child: image.trim().isEmpty
+                    ? _imageFallback()
+                    : Image.network(
+                        image,
                         width: double.infinity,
                         height: 256.h,
-                        child: Icon(Icons.error,size: 50.r,color: AppColors.secondary,));
-                  },
-                  fit: BoxFit.cover,
-                ),
+                        errorBuilder: (context, error, stackTrace) {
+                          return _imageFallback();
+                        },
+                        fit: BoxFit.cover,
+                      ),
               ),
               Positioned(
                 top: 12.h,
                 right: 5.w,
                 child:
-               ContainerFavoriteWidget(iconColor: AppColors.backgroundLight, radius: 25.r)
+               ContainerFavoriteWidget(
+                 car: car,
+                 iconColor: AppColors.backgroundLight,
+                 radius: 25.r,
+               )
               ),
             ],
           ),
@@ -97,9 +105,18 @@ class CardCar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CardDetailsWidget(image: AppImage.speed, title: '335  km/h'),
-              CardDetailsWidget(image: AppImage.timer, title: '2.8 sec'),
-              CardDetailsWidget(image: AppImage.energy, title: '789  hp'),
+              CardDetailsWidget(
+                image: AppImage.speed,
+                title: '${speed.toStringAsFixed(0)} km/h',
+              ),
+              CardDetailsWidget(
+                image: AppImage.timer,
+                title: 'dyn_seconds'.tr(namedArgs: {'value': '2.8'}),
+              ),
+              CardDetailsWidget(
+                image: AppImage.energy,
+                title: 'dyn_hp'.tr(namedArgs: {'value': '$hp'}),
+              ),
             ],
           ),
           SizedBox(height: 30.h,),
@@ -111,12 +128,26 @@ class CardCar extends StatelessWidget {
               child: OutlinedButton(
 
                 onPressed: onPressed,
-                child: Text("Details Of Car"),
+                child: Text('ui_102'.tr()),
               ),
             ),
           ),
           SizedBox(height: 4),
         ],
+      ),
+    );
+  }
+
+  Widget _imageFallback() {
+    return Container(
+      width: double.infinity,
+      height: 256.h,
+      color: Colors.white.withValues(alpha: 0.035),
+      alignment: Alignment.center,
+      child: Icon(
+        Icons.directions_car_rounded,
+        size: 54.r,
+        color: AppColors.secondary.withValues(alpha: 0.7),
       ),
     );
   }

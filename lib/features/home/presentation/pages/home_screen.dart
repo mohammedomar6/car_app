@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:car_app/core/constant/app_colors.dart';
 import 'package:car_app/core/constant/app_icon.dart';
 import 'package:car_app/core/constant/app_image.dart';
 import 'package:car_app/core/constant/app_strings.dart';
+import 'package:car_app/core/routes/app_routes.dart';
 import 'package:car_app/features/auth/presentation/widgets/card_widget.dart';
 
 import 'package:car_app/features/auth/presentation/widgets/text_field_widget.dart';
@@ -11,13 +13,13 @@ import 'package:car_app/features/home/presentation/widgets/container_brand.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:page_transition/page_transition.dart';
 
+import '../../../../core/helper/image_helper.dart';
 import '../../../brand/presentation/manager/brands_bloc.dart';
 import '../../../cars/presentation/manager/car_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -65,10 +67,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   CardWidget(
                     image: AppImage.sellCar,
                     title: AppStrings.sellCar,
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.addCar),
                   ),
                   CardWidget(
                     image: AppImage.rentCar,
                     title: AppStrings.rentCar,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.addCar,
+                        arguments: const AddCarRouteArguments(
+                          initialStatus: 'For Rent',
+                        ),
+                      );
+                    },
                   ),
                   CardWidget(
                     image: AppImage.finance,
@@ -95,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed('/brands_page');
+                      Navigator.of(context).pushNamed(AppRoutes.brands);
                     },
                     child: Text(
                       AppStrings.viewAll,
@@ -113,27 +125,34 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SizedBox(
               height: 100.h,
               child: BlocBuilder<BrandsBloc, BrandsState>(
-  builder: (context, state) {
-    if(state is GetAllBrandsLoading){
-      return Center(child: CircularProgressIndicator());
-    }
-   else if(state is GetAllBrandsError){
-     return Center(child: Text(state.massage),);
-    }
-   else if(state is GetAllBrandsSuccess){
-    return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                itemBuilder: (context, index) {
-
-                  return ContainerBrand(image: 'http://192.168.0.108:5222${state.brands[index].brandLogoUrl!}' );
+                builder: (context, state) {
+                  if (state is GetAllBrandsLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is GetAllBrandsError) {
+                    return Center(child: Text(state.massage));
+                  } else if (state is GetAllBrandsSuccess) {
+                    if (state.brands.isEmpty) {
+                      return Center(
+                        child: Text('ui_053'.tr(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.brands.length.clamp(0, 4),
+                      itemBuilder: (context, index) {
+                        return ContainerBrand(
+                          image:
+                          ImageUrlHelper.getUrl(state.brands[index].brandLogoUrl!),
+                        );
+                      },
+                    );
+                  } else {
+                    return SizedBox.shrink();
+                  }
                 },
-              );}
-   else{
-     return SizedBox.shrink();
-    }
-  },
-),
+              ),
             ),
           ),
           SliverToBoxAdapter(
@@ -148,12 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.pushNamedTransition(
-                        routeName: '/cars_page',
-                        type: PageTransitionType.leftToRight,
-                        duration: Duration(seconds: 2),
-                        curve: Curves.fastEaseInToSlowEaseOut,
-                      );
+                      Navigator.pushNamed(context, AppRoutes.cars);
                     },
                     child: Text(
                       AppStrings.viewAll,
@@ -173,31 +187,44 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Center(child: Text(state.message)),
                 );
               } else if (state is CarSuccessState) {
-                if(state.cars.isEmpty ){
+                if (state.cars.isEmpty) {
                   return SliverToBoxAdapter(
                     child: Center(
                       child: Column(
                         children: [
-                          SizedBox(height:60.h ,),
-                          Text("Cars not found",style: TextStyle(
-                            color: Colors.white
-                          ),),
+                          SizedBox(height: 60.h),
+                          Text('ui_064'.tr(),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ],
                       ),
                     ),
                   );
                 }
                 return SliverList(
-                  delegate: SliverChildBuilderDelegate(childCount: 1,(context, index) {
+                  delegate: SliverChildBuilderDelegate((
+                    context,
+                    index,
+                  ) {
                     CarResponseModel cars = state.cars[index];
                     return CardCar(
-                      image: cars.imageUrls[0],
+                      car: cars,
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.carDetails,
+                          arguments: cars,
+                        );
+                      },
+                      image: ImageUrlHelper.getUrl(
+                        cars.imageUrls.isEmpty ? '' : cars.imageUrls.first,
+                      ),
                       name: "${cars.brandId} ${state.cars[index].model}",
                       price: cars.price.toDouble(),
-                      speed: 3.2,
-                      hp: 518,
+                      speed: cars.topSpeed.toDouble(),
+                      hp: cars.horsepower,
                     );
-                  }),
+                  }, childCount: 1),
                 );
               } else if (state is CarLoadingState) {
                 return SliverToBoxAdapter(
